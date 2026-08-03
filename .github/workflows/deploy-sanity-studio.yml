@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
       SANITY_STUDIO_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_STUDIO_DATASET: ${{ vars.SANITY_DATASET }}
       SANITY_STUDIO_HOST: ${{ vars.SANITY_STUDIO_HOST }}
@@ -25,7 +25,7 @@ jobs:
 
       - name: Verify configuration
         run: |
-          test -n "$SANITY_AUTH_TOKEN" || { echo "Missing SANITY_TOKEN secret"; exit 1; }
+          test -n "$SANITY_AUTH_TOKEN" || { echo "Missing SANITY_AUTH_TOKEN secret"; exit 1; }
           test -n "$SANITY_STUDIO_PROJECT_ID" || { echo "Missing SANITY_PROJECT_ID variable"; exit 1; }
           test -n "$SANITY_STUDIO_HOST" || { echo "Missing SANITY_STUDIO_HOST variable"; exit 1; }
 
