@@ -4,11 +4,11 @@ import path from "node:path";
 const root = process.cwd();
 const projectId = process.env.SANITY_PROJECT_ID?.trim();
 const dataset = process.env.SANITY_DATASET?.trim() || "production";
-const token = process.env.SANITY_WRITE_TOKEN?.trim();
+const token = process.env.SANITY_TOKEN?.trim();
 const apiVersion = "2026-08-03";
 
 if (!projectId) throw new Error("SANITY_PROJECT_ID is required.");
-if (!token) throw new Error("SANITY_WRITE_TOKEN is required.");
+if (!token) throw new Error("SANITY_TOKEN is required.");
 
 const site = JSON.parse(
   await fs.readFile(path.join(root, "content", "site.json"), "utf8"),
