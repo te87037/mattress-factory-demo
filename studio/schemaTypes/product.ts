@@ -34,14 +34,14 @@ export const product = defineType({
     }),
     defineField({
       name: "contentId",
-      title: "系統識別碼",
-      description: "輸入產品名稱後按「產生」。建立後不建議修改。",
+      title: "舊版系統識別碼",
       type: "slug",
+      hidden: true,
+      readOnly: true,
       options: {
         source: "name",
         maxLength: 80,
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "tag",
