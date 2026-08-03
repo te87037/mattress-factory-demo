@@ -2,7 +2,7 @@
 
 ## 老闆日常操作
 
-老闆只使用 Sanity Studio 網址，不需要 GitHub：
+老闆只使用官網的 Studio 網址，不需要 GitHub：
 
 1. 登入後台。
 2. 選擇「聯絡與營業資訊」或「床墊產品」。
@@ -12,62 +12,58 @@
 
 後台不開放網站版面、CSS、程式碼、部署設定或 GitHub 分支。
 
-## 管理者一次性設定
+## 後台網址
 
-### 1. 建立 Sanity 專案
+正式後台由 GitHub Pages 與官網一起託管：
 
-- 專案名稱：凱麗企業社官網
-- Dataset：`production`
-- Dataset visibility：Public
+`https://te87037.github.io/mattress-factory-demo/studio/`
 
-### 2. 建立兩個 Sanity Token
+不再使用 `*.sanity.studio`，因此不需要 Deploy Studio Token。
 
-Sanity 將內容寫入與 Studio 部署分成不同權限，請分別建立：
+## GitHub Actions 設定
 
-- `SANITY_WRITE_TOKEN`：角色選 `Editor`，用於匯入公司、產品與聯絡資料。
-- `SANITY_AUTH_TOKEN`：角色選 `Deploy Studio`，用於部署 `*.sanity.studio` 後台。
+### Secret
 
-建議設定到期日，Token 只儲存在 GitHub Actions Secrets，不可貼入聊天、Issue 或程式碼。
+只保留一個 Repository Secret：
 
-### 3. GitHub Actions Variables
+- `SANITY_TOKEN`：Sanity Editor Token，供首次匯入或重新匯入內容
 
-Repository Settings → Secrets and variables → Actions → Variables：
+Token 不可貼入聊天、Issue、程式碼或一般文件。
 
-- `SANITY_PROJECT_ID`：Sanity Project ID
+### Variables
+
+- `SANITY_PROJECT_ID`：`1n448ksq`
 - `SANITY_DATASET`：`production`
-- `SANITY_STUDIO_HOST`：`kaili-mattress-admin`
 
-### 4. GitHub Actions Secrets
+舊的 `SANITY_STUDIO_HOST` 已不再使用，可以保留或刪除。
 
-Repository Settings → Secrets and variables → Actions → Secrets：
+## Sanity CORS 一次性設定
 
-- `SANITY_WRITE_TOKEN`：Editor Token
-- `SANITY_AUTH_TOKEN`：Deploy Studio Token
+因為 Studio 改由 GitHub Pages 自行託管，請在 Sanity 專案設定加入 CORS Origin：
 
-舊的 `SANITY_TOKEN` 不再使用，可在確認新設定成功後刪除。
+- Origin：`https://te87037.github.io`
+- Allow credentials：開啟
 
-### 5. 初始化
+路徑 `/mattress-factory-demo/studio/` 不要填入 Origin；Origin 只填網域。
 
-設定完成後，更新 `.github/sanity-setup-trigger` 即會依序：
+## 內容資料
 
-1. 匯入目前公司與產品資料。
-2. 建置繁體中文 Sanity Studio。
-3. 部署後台。
-4. 將結果寫入 `docs/SANITY_SETUP_RESULT.md`。
+目前網站既有資料已成功匯入 Sanity：
 
-後台網址：
+- 公司與聯絡資訊
+- 營業時間
+- 配送與試躺說明
+- 四種床墊產品名稱、描述與特色
 
-`https://kaili-mattress-admin.sanity.studio`
-
-### 6. 邀請老闆
-
-Sanity 專案 → Members → Invite member，輸入老闆 Email。
-
-只把後台網址交給老闆，不需要提供 GitHub 網址或帳號。
+產品照片需在 Studio 內重新上傳。
 
 ## 官網更新方式
 
 - 老闆按「發布」後，內容會儲存在 Sanity。
 - GitHub Pages 每 15 分鐘重新取得已發布內容。
 - 網站建置時會下載產品圖片，只接受 JPG、PNG 或 WebP。
-- Sanity 資料不完整或暫時無法連線時，官網使用 repository 內既有內容，不會變空白。
+- Sanity 資料不完整或暫時無法連線時，官網會使用 repository 內的既有內容，不會因此變空白。
+
+## 可選：發布後立即更新
+
+部署工作支援 GitHub `repository_dispatch` 事件 `sanity-content-update`。未設定 webhook 時，15 分鐘排程仍可正常運作。
