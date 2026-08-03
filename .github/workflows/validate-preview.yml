@@ -1,10 +1,6 @@
-name: Validate CMS preview
+name: Validate website
 
 on:
-  push:
-    branches:
-      - cms-preview
-      - "content/**"
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -13,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cms-preview-${{ github.ref }}
+  group: website-validation-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -37,7 +33,7 @@ jobs:
       - name: Type check
         run: npm run typecheck
 
-      - name: Build preview
+      - name: Build website
         run: npm run build
 
       - name: Verify static export
@@ -46,6 +42,6 @@ jobs:
       - name: Upload preview artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cms-preview-${{ github.sha }}
+          name: website-preview-${{ github.sha }}
           path: out
           retention-days: 7
