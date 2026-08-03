@@ -16,11 +16,13 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      deployed_phone: ${{ steps.content-status.outputs.phone }}
     env:
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET }}
@@ -45,6 +47,12 @@ jobs:
 
       - name: Build website
         run: npm run build
+
+      - name: Record synchronized phone
+        id: content-status
+        run: |
+          PHONE=$(node -p "require('./content/site.json').phone")
+          echo "phone=${PHONE}" >> "$GITHUB_OUTPUT"
 
       - name: Install Studio dependencies
         working-directory: studio
@@ -93,6 +101,8 @@ jobs:
     env:
       BUILD_STATUS: ${{ needs.build.result }}
       DEPLOY_STATUS: ${{ needs.deploy.result }}
+      DEPLOYED_PHONE: ${{ needs.build.outputs.deployed_phone }}
+      WORKFLOW_RUN_ID: ${{ github.run_id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -106,6 +116,10 @@ jobs:
           官網與 Studio 建置：${BUILD_STATUS}
 
           GitHub Pages 發布：${DEPLOY_STATUS}
+
+          本次部署電話：${DEPLOYED_PHONE:-未取得}
+
+          Workflow Run ID：${WORKFLOW_RUN_ID}
 
           官網：https://te87037.github.io/mattress-factory-demo/
 
