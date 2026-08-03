@@ -1,9 +1,14 @@
 const site = {
-  brand: "厚眠床墊工廠",
-  city: "新北市",
-  phone: "02-0000-0000",
-  lineUrl: "https://line.me/R/ti/p/@your-line-id",
-  address: "新北市（請換成實際地址）",
+  brand: "凱麗企業社",
+  brandMark: "凱",
+  city: "苗栗、台中",
+  serviceArea: "全台配送",
+  phone: "037-742-518",
+  phoneHref: "037742518",
+  address: "358 苗栗縣苑裡鎮山脚里5之1號",
+  businessHours: "09:00–17:30",
+  foundedYear: "1970",
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
 
 const products = [
@@ -11,7 +16,7 @@ const products = [
     name: "日常好睡款",
     tag: "最多家庭選擇",
     firmness: "適中 6／10",
-    price: "雙人尺寸 NT$18,800 起",
+    price: "價格請來電洽詢",
     description:
       "獨立筒搭配高密度舒適層，支撐明確、不會過硬，適合仰睡與側睡交替。",
     features: ["蜂巢式獨立筒", "高密度泡棉", "透氣針織布"],
@@ -20,7 +25,7 @@ const products = [
     name: "硬挺支撐款",
     tag: "偏硬睡感",
     firmness: "偏硬 8／10",
-    price: "雙人尺寸 NT$19,800 起",
+    price: "價格請來電洽詢",
     description:
       "降低深陷感並加強腰臀承托，適合喜歡硬挺感、體型較壯或容易翻身的人。",
     features: ["加強型獨立筒", "高支撐泡棉", "四周護邊"],
@@ -29,7 +34,7 @@ const products = [
     name: "柔感減壓款",
     tag: "側睡友善",
     firmness: "偏軟 4／10",
-    price: "雙人尺寸 NT$22,800 起",
+    price: "價格請來電洽詢",
     description:
       "肩臀能適度下沉，減少側睡壓迫感，同時保留穩定支撐，不是整張軟趴趴。",
     features: ["減壓舒適層", "分區獨立筒", "親膚涼感表布"],
@@ -137,10 +142,10 @@ export default function HomePage() {
       <header className="site-header">
         <div className="container nav-shell">
           <a className="brand" href="#top" aria-label={`${site.brand}首頁`}>
-            <span className="brand-mark">厚</span>
+            <span className="brand-mark">{site.brandMark}</span>
             <span>
               <strong>{site.brand}</strong>
-              <small>FACTORY DIRECT</small>
+              <small>MATTRESS FACTORY · SINCE {site.foundedYear}</small>
             </span>
           </a>
 
@@ -152,8 +157,8 @@ export default function HomePage() {
             <a href="#contact">聯絡工廠</a>
           </nav>
 
-          <a className="button button-small button-primary" href={site.lineUrl}>
-            LINE 詢問
+          <a className="button button-small button-primary" href={`tel:${site.phoneHref}`}>
+            電話預約試躺
           </a>
         </div>
       </header>
@@ -162,7 +167,7 @@ export default function HomePage() {
         <section className="hero">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="eyebrow"><span />工廠自己做，規格直接說</div>
+              <div className="eyebrow"><span />1970 年起，在苑裡做床墊</div>
               <h1>
                 床墊就該
                 <br />
@@ -173,7 +178,7 @@ export default function HomePage() {
                 不包裝話術，不一直推高價款，先找到適合你的支撐。
               </p>
               <div className="hero-actions">
-                <a className="button button-primary" href={site.lineUrl}>直接問工廠</a>
+                <a className="button button-primary" href={`tel:${site.phoneHref}`}>電話詢問工廠</a>
                 <a className="button button-secondary" href="#products">先看床墊款式</a>
               </div>
               <ul className="trust-list" aria-label="服務特色">
@@ -192,9 +197,9 @@ export default function HomePage() {
           <div className="hero-bottom-bar">
             <div className="container stats-row">
               <div><strong>工廠直營</strong><span>少一層轉手，多一分透明</span></div>
-              <div><strong>現場試躺</strong><span>不靠三分鐘的第一印象</span></div>
-              <div><strong>依需求客製</strong><span>標準與特殊尺寸都能討論</span></div>
-              <div><strong>售後有人處理</strong><span>不是出貨後就找不到人</span></div>
+              <div><strong>預約試躺</strong><span>營業時間 09:00–17:30</span></div>
+              <div><strong>苗栗・台中服務</strong><span>標準與特殊尺寸都能討論</span></div>
+              <div><strong>全台配送</strong><span>可協助舊床回收安排</span></div>
             </div>
           </div>
         </section>
@@ -207,8 +212,8 @@ export default function HomePage() {
             </div>
             <div className="large-copy">
               <p>
-                真正的工廠直營，是你問床墊裡面放什麼，我們回答得出來；你說睡起來哪裡不舒服，
-                我們知道該從哪一層調整。
+                凱麗企業社自 1970 年在苗栗苑裡製作床墊。你問床墊裡面放什麼，我們回答得出來；
+                你說睡起來哪裡不舒服，我們也知道該從哪一層調整。
               </p>
               <p>
                 我們把通路成本省下來，但不把該有的材料、品檢與售後省掉。價格可以實在，規格也要講明白。
@@ -224,7 +229,7 @@ export default function HomePage() {
                 <p className="section-kicker light">POPULAR MODELS</p>
                 <h2 className="light-text">先從你喜歡的睡感開始。</h2>
               </div>
-              <p>以下為 demo 售價與規格，正式網站可連接 CMS，由工廠自行更新。</p>
+              <p>產品名稱、完整規格與各尺寸價格將依實際資料更新；目前請來電確認。</p>
             </div>
 
             <div className="product-grid">
@@ -247,7 +252,7 @@ export default function HomePage() {
                     </ul>
                     <div className="product-footer">
                       <strong>{product.price}</strong>
-                      <a href={site.lineUrl}>詢問這一款 →</a>
+                      <a href={`tel:${site.phoneHref}`}>電話詢問這一款 →</a>
                     </div>
                   </div>
                 </article>
@@ -308,7 +313,7 @@ export default function HomePage() {
               <div className="custom-points">
                 <span>特殊長寬</span><span>厚度調整</span><span>軟硬調整</span><span>商用批量</span>
               </div>
-              <a className="button button-on-dark" href={site.lineUrl}>傳尺寸給工廠評估</a>
+              <a className="button button-on-dark" href={`tel:${site.phoneHref}`}>電話提供尺寸評估</a>
             </div>
           </div>
         </section>
@@ -338,15 +343,16 @@ export default function HomePage() {
               <h2 className="light-text">不用先決定買哪張，先說你現在睡哪裡不舒服。</h2>
               <p>告訴我們身高體重、主要睡姿、尺寸與預算，工廠會先幫你縮小範圍。</p>
               <div className="contact-actions">
-                <a className="button button-accent" href={site.lineUrl}>加入 LINE 詢問</a>
-                <a className="button button-outline-light" href={`tel:${site.phone}`}>直接打電話</a>
+                <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約試躺</a>
+                <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看工廠位置</a>
               </div>
             </div>
             <address>
               <div><span>展示／工廠</span><strong>{site.address}</strong></div>
-              <div><span>服務地區</span><strong>{site.city}，其他地區可詢問配送</strong></div>
-              <div><span>聯絡電話</span><strong>{site.phone}</strong></div>
-              <div><span>營業方式</span><strong>建議預約，避免現場無人接待</strong></div>
+              <div><span>主要服務區域</span><strong>{site.city}，{site.serviceArea}</strong></div>
+              <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
+              <div><span>營業時間</span><strong>{site.businessHours}，建議先電話預約試躺</strong></div>
+              <div><span>其他服務</span><strong>特殊尺寸可討論，提供舊床回收安排</strong></div>
             </address>
           </div>
         </section>
@@ -355,16 +361,16 @@ export default function HomePage() {
       <footer>
         <div className="container footer-row">
           <div className="brand footer-brand">
-            <span className="brand-mark">厚</span>
-            <span><strong>{site.brand}</strong><small>睡得舒服，買得明白。</small></span>
+            <span className="brand-mark">{site.brandMark}</span>
+            <span><strong>{site.brand}</strong><small>苗栗苑裡床墊工廠 · {site.foundedYear} 年創立</small></span>
           </div>
-          <p>© {new Date().getFullYear()} {site.brand} · Next.js Demo</p>
+          <p>© {new Date().getFullYear()} {site.brand} · All rights reserved.</p>
         </div>
       </footer>
 
       <div className="mobile-cta">
-        <a href={`tel:${site.phone}`}>電話</a>
-        <a href={site.lineUrl}>LINE 問工廠</a>
+        <a href={`tel:${site.phoneHref}`}>電話詢問</a>
+        <a href={site.mapUrl} target="_blank" rel="noreferrer">工廠位置</a>
       </div>
     </>
   );
