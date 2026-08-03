@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": "traditional-spring",
+      "name": "傳統連結式彈簧床",
+      "tag": "主打品項",
+      "description": "凱麗企業社目前主打的床墊類別，可到苑裡工廠試躺，再確認實際規格與報價。",
+      "image": "",
+      "imageAlt": "傳統連結式彈簧床",
+      "features": ["主打品項", "自家工廠製作", "現場試躺"],
+      "visible": true
+    },
+    {
+      "id": "pocket-spring",
+      "name": "獨立筒床墊",
+      "tag": "產品類別",
+      "description": "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格以電話或現場說明為準。",
+      "image": "",
+      "imageAlt": "獨立筒床墊",
+      "features": ["規格現場確認", "現場試躺", "本島配送"],
+      "visible": true
+    },
+    {
+      "id": "latex",
+      "name": "乳膠床墊",
+      "tag": "產品類別",
+      "description": "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格以電話或現場說明為準。",
+      "image": "",
+      "imageAlt": "乳膠床墊",
+      "features": ["規格現場確認", "現場試躺", "本島配送"],
+      "visible": true
+    },
+    {
+      "id": "custom-size",
+      "name": "客製尺寸床墊",
+      "tag": "特殊尺寸",
+      "description": "可依床架與空間需求討論特殊尺寸，製作前先確認尺寸、搬運條件與報價。",
+      "image": "",
+      "imageAlt": "客製尺寸床墊",
+      "features": ["特殊尺寸", "自家工廠製作", "本島配送"],
+      "visible": true
+    }
+  ]
+}
