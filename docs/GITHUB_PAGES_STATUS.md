@@ -1,8 +1,8 @@
 # GitHub Pages 部署狀態
 
-官網與 Studio 建置：success
+官網與 Studio 建置：cancelled
 
-GitHub Pages 發布：success
+GitHub Pages 發布：cancelled
 
 官網：https://te87037.github.io/mattress-factory-demo/
 
