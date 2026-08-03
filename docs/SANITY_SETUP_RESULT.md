@@ -2,9 +2,9 @@
 
 狀態：failure
 
-內容匯入：skipped
+內容匯入：success
 
-Studio 部署：skipped
+Studio 部署：failure
 
 Project ID：1n448ksq
 
@@ -12,4 +12,4 @@ Dataset：production
 
 後台：https://kaili-mattress-admin.sanity.studio
 
-Workflow run：https://github.com/te87037/mattress-factory-demo/actions/runs/30795046179
+Workflow run：https://github.com/te87037/mattress-factory-demo/actions/runs/30795412287
