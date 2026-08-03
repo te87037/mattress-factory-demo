@@ -31,13 +31,17 @@ const query = `{
     heritageYear
   },
   "products": *[_type == "product"] | order(order asc, _createdAt asc){
-    "id": contentId.current,
+    "id": coalesce(contentId.current, _id),
     visible,
     name,
     tag,
     description,
-    "imageUrl": image.asset->url,
-    "imageAlt": coalesce(image.alt, name),
+    "images": images[]{
+      "url": asset->url,
+      "alt": alt
+    },
+    "legacyImageUrl": image.asset->url,
+    "legacyImageAlt": image.alt,
     features
   }
 }`;
@@ -45,7 +49,7 @@ const query = `{
 const queryUrl = new URL(`https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${encodeURIComponent(dataset)}`);
 queryUrl.searchParams.set("query", query);
 
-const headers = readToken ? { Authorization: `Bearer ${readToken}` } : {};
+const headers = readToken ? {Authorization: `Bearer ${readToken}`} : {};
 
 const response = await fetch(queryUrl, {
   headers,
@@ -66,13 +70,13 @@ if (!site || !Array.isArray(products) || products.length === 0) {
 }
 
 const uploadsDir = path.join(root, "public", "uploads", "products");
-await fs.mkdir(uploadsDir, { recursive: true });
+await fs.mkdir(uploadsDir, {recursive: true});
 
 const existingFiles = await fs.readdir(uploadsDir).catch(() => []);
 await Promise.all(
   existingFiles
     .filter((file) => file.startsWith("sanity-"))
-    .map((file) => fs.rm(path.join(uploadsDir, file), { force: true })),
+    .map((file) => fs.rm(path.join(uploadsDir, file), {force: true})),
 );
 
 const extensionFromContentType = (contentType, url) => {
@@ -90,29 +94,47 @@ const extensionFromContentType = (contentType, url) => {
 
 const safeId = (value) => String(value || "product").replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
 
+const downloadImage = async ({url, alt}, product, imageIndex) => {
+  const imageResponse = await fetch(url, {
+    signal: AbortSignal.timeout(30000),
+  });
+
+  if (!imageResponse.ok) {
+    throw new Error(`Failed to download image ${imageIndex + 1} for ${product.name}: ${imageResponse.status}`);
+  }
+
+  const extension = extensionFromContentType(imageResponse.headers.get("content-type"), url);
+  if (!extension) {
+    throw new Error(`Unsupported image type for ${product.name}. Use JPG, PNG or WebP.`);
+  }
+
+  const filename = `sanity-${safeId(product.id)}-${String(imageIndex + 1).padStart(2, "0")}.${extension}`;
+  const filePath = path.join(uploadsDir, filename);
+  const imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
+  await fs.writeFile(filePath, imageBuffer);
+
+  return {
+    src: `uploads/products/${filename}`,
+    alt: String(alt || product.name || "產品照片").trim(),
+  };
+};
+
 const normalizedProducts = [];
 for (const product of products) {
-  let image = "";
+  const sourceImages = Array.isArray(product.images)
+    ? product.images.filter((item) => item?.url)
+    : [];
 
-  if (product.imageUrl) {
-    const imageResponse = await fetch(product.imageUrl, {
-      signal: AbortSignal.timeout(30000),
+  if (sourceImages.length === 0 && product.legacyImageUrl) {
+    sourceImages.push({
+      url: product.legacyImageUrl,
+      alt: product.legacyImageAlt || product.name,
     });
+  }
 
-    if (!imageResponse.ok) {
-      throw new Error(`Failed to download image for ${product.name}: ${imageResponse.status}`);
-    }
-
-    const extension = extensionFromContentType(imageResponse.headers.get("content-type"), product.imageUrl);
-    if (!extension) {
-      throw new Error(`Unsupported image type for ${product.name}. Use JPG, PNG or WebP.`);
-    }
-
-    const filename = `sanity-${safeId(product.id)}.${extension}`;
-    const filePath = path.join(uploadsDir, filename);
-    const imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
-    await fs.writeFile(filePath, imageBuffer);
-    image = `uploads/products/${filename}`;
+  const images = [];
+  for (const [imageIndex, sourceImage] of sourceImages.slice(0, 8).entries()) {
+    images.push(await downloadImage(sourceImage, product, imageIndex));
   }
 
   normalizedProducts.push({
@@ -121,8 +143,7 @@ for (const product of products) {
     name: String(product.name || "").trim(),
     tag: String(product.tag || "").trim(),
     description: String(product.description || "").trim(),
-    image,
-    imageAlt: String(product.imageAlt || product.name || "").trim(),
+    images,
     features: Array.isArray(product.features)
       ? product.features.map((item) => String(item).trim()).filter(Boolean)
       : [],
@@ -135,7 +156,7 @@ await fs.writeFile(
 );
 await fs.writeFile(
   path.join(root, "content", "products.json"),
-  `${JSON.stringify({ products: normalizedProducts }, null, 2)}\n`,
+  `${JSON.stringify({products: normalizedProducts}, null, 2)}\n`,
 );
 
 console.log(`Sanity content synchronized: ${normalizedProducts.length} products.`);

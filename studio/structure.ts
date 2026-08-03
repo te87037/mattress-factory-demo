@@ -19,5 +19,5 @@ export const studioStructure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem("product")
         .id("products")
-        .title("床墊產品"),
+        .title("床墊產品（按＋新增）"),
     ]);
