@@ -7,7 +7,7 @@ on:
       - ".github/workflows/setup-sanity-once.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   setup:
@@ -54,7 +54,33 @@ jobs:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
         run: npx sanity deploy --yes --title "凱麗企業社內容後台" --url "$SANITY_STUDIO_HOST"
 
-      - name: Summary
+      - name: Record initialization result
+        if: always()
+        env:
+          SETUP_STATUS: ${{ job.status }}
         run: |
-          echo "## Sanity 初始化完成" >> "$GITHUB_STEP_SUMMARY"
+          mkdir -p docs
+          cat > docs/SANITY_SETUP_RESULT.md <<EOF
+          # Sanity 初始化結果
+
+          狀態：${SETUP_STATUS}
+
+          Project ID：${SANITY_PROJECT_ID}
+
+          Dataset：${SANITY_DATASET}
+
+          後台：https://${SANITY_STUDIO_HOST}.sanity.studio
+
+          Workflow run：https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/SANITY_SETUP_RESULT.md
+          git diff --cached --quiet || git commit -m "Record Sanity initialization result"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Sanity 初始化：${{ job.status }}" >> "$GITHUB_STEP_SUMMARY"
           echo "後台：https://${SANITY_STUDIO_HOST}.sanity.studio" >> "$GITHUB_STEP_SUMMARY"
