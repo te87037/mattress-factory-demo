@@ -7,71 +7,68 @@ const site = {
   phoneHref: "037742518",
   address: "358 苗栗縣苑裡鎮山脚里5之1號",
   businessHours: "09:00–17:30",
-  foundedYear: "1970",
+  heritageYear: "1970",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
+
 const products = [
   {
     name: "傳統連結式彈簧床",
-    tag: "主打款",
-    firmness: "整體支撐",
-    price: "起價請來電洽詢",
+    tag: "主打品項",
     description:
-      "凱麗企業社的主打床款，採傳統連結式彈簧結構，睡感穩定、支撐明確，適合偏好扎實承托感的家庭。",
-    features: ["連結式彈簧", "扎實支撐", "可預約試躺"],
+      "凱麗企業社目前主打的床墊類別，可先電話預約到工廠試躺，再依實際需求確認規格與報價。",
+    features: ["主打品項", "自家工廠製作", "預約試躺"],
   },
   {
     name: "獨立筒床墊",
-    tag: "降低翻身干擾",
-    firmness: "多種睡感",
-    price: "起價請來電洽詢",
+    tag: "產品類別",
     description:
-      "每顆彈簧各自受力，能降低同床翻身時的牽動感；實際軟硬度與舒適層可依需求現場比較。",
-    features: ["獨立筒結構", "減少相互干擾", "軟硬可諮詢"],
+      "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格請於電話或現場諮詢確認。",
+    features: ["自家工廠製作", "預約試躺", "全台配送"],
   },
   {
     name: "乳膠床墊",
-    tag: "彈性貼合",
-    firmness: "依規格選擇",
-    price: "起價請來電洽詢",
+    tag: "產品類別",
     description:
-      "提供乳膠材質床墊選擇，著重彈性與貼合感；厚度、結構與適合的睡感可於預約試躺時確認。",
-    features: ["乳膠材質", "彈性貼合", "規格可諮詢"],
+      "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格請於電話或現場諮詢確認。",
+    features: ["自家工廠製作", "預約試躺", "全台配送"],
   },
   {
     name: "客製尺寸床墊",
     tag: "特殊尺寸",
-    firmness: "依需求製作",
-    price: "起價請來電洽詢",
     description:
-      "適用於特殊床架、和室、上下舖、民宿與其他非標準空間，提供尺寸、厚度及搬運條件評估。",
-    features: ["特殊長寬", "厚度可討論", "全台配送評估"],
+      "可依床架與空間需求討論特殊尺寸，製作前會先確認尺寸、搬運條件與報價。",
+    features: ["特殊尺寸", "自家工廠製作", "全台配送"],
   },
 ];
 
 const steps = [
-  ["01", "了解你的睡法", "先問身形、睡姿、床伴與既有床墊問題，不先推最貴的。"],
-  ["02", "挑結構與軟硬", "現場比較不同支撐與舒適層，找出真正適合的睡感。"],
-  ["03", "工廠排程製作", "確認尺寸後進入製作，材料、厚度與交期都寫清楚。"],
-  ["04", "品檢配送到家", "完成平整度、外觀與尺寸檢查，再安排配送與舊床處理。"],
+  ["01", "電話預約與詢問", "先確認來訪時間、床墊類別、尺寸與主要需求。"],
+  ["02", "現場試躺討論", "到苑裡工廠了解產品，依實際展示與需求確認選擇。"],
+  ["03", "自家工廠製作", "確認內容後由苑裡自家工廠安排製作。"],
+  ["04", "安排配送到家", "依配送地點與搬運條件安排，全台皆可洽詢。"],
 ];
 
 const faqs = [
   [
-    "工廠直營真的比較便宜嗎？",
-    "我們省下多層經銷與展示成本，但不靠偷料壓低價格。每款床墊會說明主要結構、材料與價格，讓你知道錢花在哪裡。",
+    "凱麗企業社從 1970 年就成立了嗎？",
+    "1970 年代表家族開始製作床墊；目前仍由家族經營。企業社實際設立年份未在網站上另行標示。",
   ],
   [
-    "床墊越硬越護腰嗎？",
-    "不一定。太硬可能讓肩臀無法下沉、腰部懸空；太軟則可能讓骨盆下陷。正確做法是依身形與睡姿選擇支撐。",
+    "床墊是在苑裡製作嗎？",
+    "是，床墊由苗栗苑裡的自家工廠製作，歡迎先電話預約來訪與試躺。",
+  ],
+  [
+    "主要服務哪些客戶？",
+    "目前主要服務一般家庭、家具行與批發代工客戶，其他合作需求也可以電話洽詢。",
   ],
   [
     "可以做特殊尺寸嗎？",
-    "可以。提供床架內徑、預計厚度與現場照片，我們會評估製作、搬運與使用是否合適。",
+    "可以。請提供床架內徑、預計尺寸與搬運條件，工廠會先評估再確認製作與報價。",
   ],
   [
-    "能不能處理舊床墊？",
-    "可依配送地區、樓層與電梯條件協助安排；實際費用會在下單前說明，不到現場才臨時加價。",
+    "是否提供全台配送與舊床回收？",
+    "提供全台配送洽詢，舊床回收可依地區、樓層與現場條件一併評估安排。",
   ],
 ];
 
@@ -80,7 +77,7 @@ function MattressCutaway() {
     <svg
       viewBox="0 0 680 520"
       role="img"
-      aria-label="床墊分層結構示意圖"
+      aria-label="床墊結構示意圖"
       className="hero-illustration"
     >
       <defs>
@@ -113,16 +110,16 @@ function MattressCutaway() {
       </g>
       <path d="M82 354 383 465l218-84v32l-218 84L82 386z" fill="#19313d" />
       <g fontFamily="Arial, sans-serif" fontSize="17" fill="#19313d" fontWeight="700">
-        <text x="35" y="102">親膚表布</text>
+        <text x="35" y="102">表布</text>
         <text x="529" y="211">舒適層</text>
-        <text x="515" y="335">獨立筒</text>
-        <text x="47" y="417">穩固底層</text>
+        <text x="500" y="335">支撐核心</text>
+        <text x="47" y="417">底層</text>
       </g>
       <g stroke="#19313d" strokeWidth="2">
-        <path d="M121 107 190 94" />
+        <path d="M93 107 190 94" />
         <path d="m520 217-53 25" />
-        <path d="m510 340-58 24" />
-        <path d="m130 411 45-7" />
+        <path d="m495 340-43 24" />
+        <path d="m96 411 79-7" />
       </g>
     </svg>
   );
@@ -153,14 +150,14 @@ export default function HomePage() {
             <span className="brand-mark">{site.brandMark}</span>
             <span>
               <strong>{site.brand}</strong>
-              <small>EST. {site.foundedYear} · FACTORY DIRECT</small>
+              <small>FAMILY MATTRESS MAKERS · SINCE {site.heritageYear}</small>
             </span>
           </a>
 
           <nav className="desktop-nav" aria-label="主要導覽">
-            <a href="#products">床墊款式</a>
-            <a href="#materials">材料說明</a>
-            <a href="#process">製作流程</a>
+            <a href="#products">床墊品項</a>
+            <a href="#factory">工廠背景</a>
+            <a href="#process">服務流程</a>
             <a href="#custom">尺寸客製</a>
             <a href="#contact">聯絡工廠</a>
           </nav>
@@ -175,56 +172,55 @@ export default function HomePage() {
         <section className="hero">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="eyebrow"><span />工廠自己做，規格直接說</div>
+              <div className="eyebrow"><span />家族經營・苑裡自家工廠</div>
               <h1>
                 床墊就該
                 <br />
                 <em>睡得舒服，買得明白。</em>
               </h1>
               <p className="hero-lead">
-                凱麗企業社自 1970 年在苗栗苑裡製作床墊，提供傳統連結式彈簧床、獨立筒、乳膠與客製尺寸床墊。
-                可先預約試躺，再依睡感、尺寸與預算選擇。
+                家族自 {site.heritageYear} 年開始製作床墊，目前仍由家族經營，並於苗栗苑裡自家工廠製作。
+                提供傳統連結式彈簧床、獨立筒、乳膠與客製尺寸床墊。
               </p>
               <div className="hero-actions">
                 <a className="button button-primary" href={`tel:${site.phoneHref}`}>直接問工廠</a>
-                <a className="button button-secondary" href="#products">先看床墊款式</a>
+                <a className="button button-secondary" href="#products">查看床墊品項</a>
               </div>
               <ul className="trust-list" aria-label="服務特色">
-                <li>起價透明</li>
-                <li>材料說明</li>
+                <li>家族經營</li>
+                <li>自家工廠製作</li>
                 <li>尺寸客製</li>
                 <li>預約試躺</li>
               </ul>
             </div>
             <div className="hero-visual">
-              <div className="visual-note note-one">每層材料都說清楚</div>
+              <div className="visual-note note-one">苑裡自家工廠製作</div>
               <MattressCutaway />
-              <div className="visual-note note-two">軟硬度現場比較</div>
+              <div className="visual-note note-two">來訪前可先電話預約</div>
             </div>
           </div>
           <div className="hero-bottom-bar">
             <div className="container stats-row">
-              <div><strong>1970 年創立</strong><span>在苗栗苑裡長期製作床墊</span></div>
-              <div><strong>預約試躺</strong><span>09:00–17:30，來訪前先電話確認</span></div>
-              <div><strong>尺寸客製</strong><span>標準與特殊尺寸都能討論</span></div>
+              <div><strong>家族自 1970 年製床</strong><span>延續至今的家族經營</span></div>
+              <div><strong>苑裡自家工廠</strong><span>床墊由自家工廠製作</span></div>
+              <div><strong>多元服務客群</strong><span>家庭、家具行與批發代工</span></div>
               <div><strong>全台配送</strong><span>可一併評估舊床回收</span></div>
             </div>
           </div>
         </section>
 
-        <section className="section intro-section">
+        <section className="section intro-section" id="factory">
           <div className="container two-column intro-grid">
             <div>
-              <p className="section-kicker">WHY FACTORY DIRECT</p>
-              <h2>工廠直營，不是只賣便宜。</h2>
+              <p className="section-kicker">FAMILY BUSINESS</p>
+              <h2>從家族製床經驗，到苑裡自家工廠。</h2>
             </div>
             <div className="large-copy">
               <p>
-                凱麗企業社創立於 1970 年，工廠位於苗栗縣苑裡鎮。從傳統連結式彈簧床到獨立筒、
-                乳膠與特殊尺寸，都能直接與工廠討論。
+                家族自 1970 年開始製作床墊，凱麗企業社目前仍由家族經營，床墊在苗栗縣苑裡鎮的自家工廠製作。
               </p>
               <p>
-                我們主要服務苗栗、台中，並提供全台配送與舊床回收評估。看得到工廠、找得到人，規格與費用在製作前說清楚。
+                主要服務一般家庭、家具行與批發代工客戶；苗栗、台中為主要服務區域，也提供全台配送洽詢。
               </p>
             </div>
           </div>
@@ -234,10 +230,10 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading split-heading">
               <div>
-                <p className="section-kicker light">POPULAR MODELS</p>
-                <h2 className="light-text">先從你喜歡的睡感開始。</h2>
+                <p className="section-kicker light">PRODUCT CATEGORIES</p>
+                <h2 className="light-text">目前提供的床墊品項。</h2>
               </div>
-              <p>提供四大類床墊選擇；各款起價與詳細規格會依下一階段資料陸續補齊。</p>
+              <p>產品價格與詳細規格暫不公開，請電話預約試躺或直接向工廠確認。</p>
             </div>
 
             <div className="product-grid">
@@ -252,14 +248,12 @@ export default function HomePage() {
                   <div className="product-content">
                     <div className="product-title-row">
                       <h3>{product.name}</h3>
-                      <span>{product.firmness}</span>
                     </div>
                     <p>{product.description}</p>
                     <ul>
                       {product.features.map((feature) => <li key={feature}>{feature}</li>)}
                     </ul>
                     <div className="product-footer">
-                      <strong>{product.price}</strong>
                       <a href={`tel:${site.phoneHref}`}>電話詢問這一款 →</a>
                     </div>
                   </div>
@@ -275,13 +269,13 @@ export default function HomePage() {
               <MattressCutaway />
             </div>
             <div className="material-copy">
-              <p className="section-kicker">MATERIALS IN PLAIN WORDS</p>
-              <h2>不只寫「高級材料」，直接告訴你作用。</h2>
+              <p className="section-kicker">PRODUCT INFORMATION</p>
+              <h2>規格尚未確認，就不先填入推測數字。</h2>
               <div className="material-list">
-                <div><span>01</span><h3>表布</h3><p>接觸皮膚的第一層，重點是觸感、透氣與清潔維護，不是花紋越多越高級。</p></div>
-                <div><span>02</span><h3>舒適層</h3><p>決定包覆與壓力分散。泡棉密度、厚度與搭配方式，比一個響亮名稱更重要。</p></div>
-                <div><span>03</span><h3>支撐核心</h3><p>獨立筒線徑、圈數、排列與分區會影響承托及干擾，不是顆數越多就一定越好。</p></div>
-                <div><span>04</span><h3>床沿與底層</h3><p>影響坐床邊、上下床與長期形變。該加強的位置，我們不做成看不見就省略。</p></div>
+                <div><span>01</span><h3>產品類別</h3><p>先確認是傳統連結式、獨立筒、乳膠或特殊尺寸需求。</p></div>
+                <div><span>02</span><h3>實際尺寸</h3><p>標準尺寸或床架內徑，都建議在製作與報價前再次確認。</p></div>
+                <div><span>03</span><h3>產品規格</h3><p>厚度、材料、軟硬與結構以現場產品及工廠說明為準。</p></div>
+                <div><span>04</span><h3>配送條件</h3><p>配送地點、樓層、電梯與舊床回收條件會一併評估。</p></div>
               </div>
             </div>
           </div>
@@ -291,7 +285,7 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading centered">
               <p className="section-kicker">HOW WE WORK</p>
-              <h2>從詢問到送到家，四個步驟說清楚。</h2>
+              <h2>從詢問到配送，四個步驟。</h2>
             </div>
             <div className="process-grid">
               {steps.map(([number, title, description]) => (
@@ -309,19 +303,18 @@ export default function HomePage() {
           <div className="container custom-grid">
             <div className="factory-card">
               <FactoryBadge />
-              <div><strong>自家工廠排程製作</strong><span>尺寸與結構都能直接討論</span></div>
+              <div><strong>苑裡自家工廠製作</strong><span>家庭、家具行與批發代工皆可洽詢</span></div>
             </div>
             <div className="custom-copy">
               <p className="section-kicker light">CUSTOM SIZE</p>
-              <h2 className="light-text">床架不是標準尺寸？先別急著將就。</h2>
+              <h2 className="light-text">特殊尺寸，可直接和工廠討論。</h2>
               <p>
-                掀床、上下舖、和室、露營車、民宿與特殊床架，都可以提供內徑與照片評估。
-                我們會先確認尺寸公差、搬運路線與使用需求，再報價製作。
+                請提供床架內徑、預計長寬、厚度需求與搬運條件，工廠會先評估製作方式與報價。
               </p>
               <div className="custom-points">
-                <span>特殊長寬</span><span>厚度調整</span><span>軟硬調整</span><span>商用批量</span>
+                <span>特殊長寬</span><span>家庭需求</span><span>家具行合作</span><span>批發代工</span>
               </div>
-              <a className="button button-on-dark" href={`tel:${site.phoneHref}`}>電話提供尺寸評估</a>
+              <a className="button button-on-dark" href={`tel:${site.phoneHref}`}>電話提供尺寸洽詢</a>
             </div>
           </div>
         </section>
@@ -330,8 +323,8 @@ export default function HomePage() {
           <div className="container faq-grid">
             <div>
               <p className="section-kicker">COMMON QUESTIONS</p>
-              <h2>買床前，先把疑問問完。</h2>
-              <p className="muted">沒有不好意思問的問題。規格、運費、樓層、保固都應該在下單前說明。</p>
+              <h2>來訪與訂製前，可以先確認。</h2>
+              <p className="muted">產品規格、價格、配送與回收條件，請以電話或現場確認內容為準。</p>
             </div>
             <div className="faq-list">
               {faqs.map(([question, answer]) => (
@@ -348,10 +341,10 @@ export default function HomePage() {
           <div className="container contact-grid">
             <div>
               <p className="section-kicker light">CONTACT THE FACTORY</p>
-              <h2 className="light-text">不用先決定買哪張，先說你現在睡哪裡不舒服。</h2>
-              <p>告訴我們身高體重、主要睡姿、尺寸與預算，工廠會先幫你縮小範圍。</p>
+              <h2 className="light-text">預約試躺或合作洽詢，直接聯絡工廠。</h2>
+              <p>一般家庭、家具行、批發代工與其他合作需求，皆可先電話說明。</p>
               <div className="contact-actions">
-                <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約試躺</a>
+                <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約／洽詢</a>
                 <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看 Google 地圖</a>
               </div>
             </div>
@@ -360,6 +353,7 @@ export default function HomePage() {
               <div><span>主要服務</span><strong>{site.city}；{site.serviceArea}</strong></div>
               <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
               <div><span>營業時間</span><strong>{site.businessHours}，接受預約試躺</strong></div>
+              <div><span>主要客戶</span><strong>一般家庭、家具行、批發代工</strong></div>
             </address>
           </div>
         </section>
@@ -369,14 +363,14 @@ export default function HomePage() {
         <div className="container footer-row">
           <div className="brand footer-brand">
             <span className="brand-mark">{site.brandMark}</span>
-            <span><strong>{site.brand}</strong><small>苗栗苑裡床墊工廠 · 創立於 {site.foundedYear}</small></span>
+            <span><strong>{site.brand}</strong><small>家族自 {site.heritageYear} 年開始製作床墊</small></span>
           </div>
           <p>© {new Date().getFullYear()} {site.brand} · 苗栗苑裡床墊工廠</p>
         </div>
       </footer>
 
       <div className="mobile-cta">
-        <a href={`tel:${site.phoneHref}`}>電話預約</a>
+        <a href={`tel:${site.phoneHref}`}>電話洽詢</a>
         <a href={site.mapUrl} target="_blank" rel="noreferrer">地圖導航</a>
       </div>
     </>
