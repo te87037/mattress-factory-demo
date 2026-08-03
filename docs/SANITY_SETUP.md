@@ -16,59 +16,50 @@
 
 ### 1. 建立 Sanity 專案
 
-1. 登入 Sanity 管理介面。
-2. 建立新專案，名稱可填「凱麗企業社官網」。
-3. Dataset 使用 `production`，並維持 Public。
-4. 記下 Project ID。
+- 專案名稱：凱麗企業社官網
+- Dataset：`production`
+- Dataset visibility：Public
 
-### 2. 建立一個 Sanity Token
+### 2. 建立兩個 Sanity Token
 
-在 Sanity 專案的 API Tokens 建立一個具備內容寫入及 Studio 部署權限的 Token，名稱可填「GitHub Actions」。
+Sanity 將內容寫入與 Studio 部署分成不同權限，請分別建立：
 
-建議設定到期日，並只將 Token 儲存在 GitHub Actions Secret。Token 不可貼入聊天、Issue、程式碼或一般文件。
+- `SANITY_WRITE_TOKEN`：角色選 `Editor`，用於匯入公司、產品與聯絡資料。
+- `SANITY_AUTH_TOKEN`：角色選 `Deploy Studio`，用於部署 `*.sanity.studio` 後台。
 
-### 3. 設定 GitHub Actions Variables
+建議設定到期日，Token 只儲存在 GitHub Actions Secrets，不可貼入聊天、Issue 或程式碼。
+
+### 3. GitHub Actions Variables
 
 Repository Settings → Secrets and variables → Actions → Variables：
 
 - `SANITY_PROJECT_ID`：Sanity Project ID
 - `SANITY_DATASET`：`production`
-- `SANITY_STUDIO_HOST`：例如 `kaili-mattress-admin`
+- `SANITY_STUDIO_HOST`：`kaili-mattress-admin`
 
-`SANITY_STUDIO_HOST` 必須以英文字母開頭，部署後網址會是：
-
-`https://kaili-mattress-admin.sanity.studio`
-
-### 4. 設定 GitHub Actions Secret
+### 4. GitHub Actions Secrets
 
 Repository Settings → Secrets and variables → Actions → Secrets：
 
-- `SANITY_TOKEN`：貼入新建立的 Sanity Token
+- `SANITY_WRITE_TOKEN`：Editor Token
+- `SANITY_AUTH_TOKEN`：Deploy Studio Token
 
-Public dataset 不需要 `SANITY_API_READ_TOKEN`。若日後改成 Private dataset，再建立唯讀 Token並新增該 Secret。
+舊的 `SANITY_TOKEN` 不再使用，可在確認新設定成功後刪除。
 
-### 5. 匯入目前網站資料
+### 5. 初始化
 
-GitHub → Actions → `Import Existing Content to Sanity` → Run workflow。
+設定完成後，更新 `.github/sanity-setup-trigger` 即會依序：
 
-這會匯入：
+1. 匯入目前公司與產品資料。
+2. 建置繁體中文 Sanity Studio。
+3. 部署後台。
+4. 將結果寫入 `docs/SANITY_SETUP_RESULT.md`。
 
-- 公司與聯絡資訊
-- 營業時間
-- 配送與試躺說明
-- 四種床墊產品名稱、描述與特色
+後台網址：
 
-目前產品照片需要在 Sanity Studio 內重新上傳。
+`https://kaili-mattress-admin.sanity.studio`
 
-### 6. 部署後台
-
-GitHub → Actions → `Deploy Sanity Studio` → Run workflow。
-
-完成後使用：
-
-`https://<SANITY_STUDIO_HOST>.sanity.studio`
-
-### 7. 邀請老闆
+### 6. 邀請老闆
 
 Sanity 專案 → Members → Invite member，輸入老闆 Email。
 
@@ -79,8 +70,4 @@ Sanity 專案 → Members → Invite member，輸入老闆 Email。
 - 老闆按「發布」後，內容會儲存在 Sanity。
 - GitHub Pages 每 15 分鐘重新取得已發布內容。
 - 網站建置時會下載產品圖片，只接受 JPG、PNG 或 WebP。
-- Sanity 尚未設定、資料不完整或暫時無法連線時，官網會使用 repository 內的既有內容，不會因此變空白。
-
-## 可選：發布後立即更新
-
-部署工作也支援 GitHub `repository_dispatch` 事件 `sanity-content-update`。日後可在 Sanity 建立 webhook 呼叫 GitHub API，讓發布後立即觸發部署；未設定 webhook 時，15 分鐘排程仍可正常運作。
+- Sanity 資料不完整或暫時無法連線時，官網使用 repository 內既有內容，不會變空白。
