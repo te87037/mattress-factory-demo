@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [sanity-content-update]
+  schedule:
+    - cron: "17 * * * *"
 
 permissions:
   contents: read
@@ -17,6 +21,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+      SANITY_DATASET: ${{ vars.SANITY_DATASET }}
+      SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
