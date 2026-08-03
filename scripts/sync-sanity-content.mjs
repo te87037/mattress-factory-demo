@@ -31,7 +31,7 @@ const query = `{
     heritageYear
   },
   "products": *[_type == "product"] | order(order asc, _createdAt asc){
-    "id": contentId,
+    "id": contentId.current,
     visible,
     name,
     tag,
