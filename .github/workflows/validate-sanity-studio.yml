@@ -1,0 +1,38 @@
+name: Validate Sanity Studio
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "studio/**"
+      - "scripts/sync-sanity-content.mjs"
+      - "scripts/import-to-sanity.mjs"
+      - ".github/workflows/deploy-sanity-studio.yml"
+      - ".github/workflows/import-sanity-content.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-studio:
+    runs-on: ubuntu-latest
+    env:
+      SANITY_STUDIO_PROJECT_ID: kaili000
+      SANITY_STUDIO_DATASET: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Studio dependencies
+        working-directory: studio
+        run: npm install
+
+      - name: Build Studio
+        working-directory: studio
+        run: npm run build
