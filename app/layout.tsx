@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import {AdminShortcut} from "./components/AdminShortcut";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-Hant-TW">
-      <body>{children}</body>
+      <body>
+        {children}
+        <AdminShortcut />
+      </body>
     </html>
   );
 }
