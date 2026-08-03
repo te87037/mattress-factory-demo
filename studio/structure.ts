@@ -16,7 +16,7 @@ export const studioStructure: StructureResolver = (S) =>
             .documentId("siteSettings")
             .title("聯絡與營業資訊"),
         ),
-      S.divider().id("content-divider"),
+      S.divider(),
       S.documentTypeListItem("product")
         .id("products")
         .title("床墊產品"),
