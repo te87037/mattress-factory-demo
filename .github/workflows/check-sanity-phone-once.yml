@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/check-sanity-phone-once.yml"
+      - ".github/sanity-phone-check-trigger"
 
 permissions:
   contents: write
