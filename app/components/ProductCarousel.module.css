@@ -1,0 +1,119 @@
+.hasPhoto {
+  background: #d9d5c9;
+}
+
+.hasPhoto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(14, 34, 44, 0.08), rgba(14, 34, 44, 0.2));
+  pointer-events: none;
+}
+
+.hasPhoto :global(.product-index),
+.hasPhoto :global(.product-tag) {
+  z-index: 4;
+}
+
+.carousel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  touch-action: pan-y;
+  background: #d9d5c9;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  background: rgba(14, 34, 44, 0.72);
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.arrow:hover,
+.arrow:focus-visible {
+  background: rgba(14, 34, 44, 0.94);
+}
+
+.left {
+  left: 12px;
+}
+
+.right {
+  right: 12px;
+}
+
+.dots {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 14px;
+  display: flex;
+  gap: 7px;
+  padding: 7px 9px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(14, 34, 44, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.52);
+  cursor: pointer;
+}
+
+.activeDot {
+  width: 22px;
+  border-radius: 999px;
+  background: #efb247;
+}
+
+@media (max-width: 640px) {
+  .arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .left {
+    left: 10px;
+  }
+
+  .right {
+    right: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .dot {
+    transition: none;
+  }
+}
