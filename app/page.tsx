@@ -2,7 +2,7 @@ const site = {
   brand: "凱麗企業社",
   brandMark: "凱",
   city: "苗栗、台中",
-  serviceArea: "全台配送",
+  serviceArea: "台灣本島配送（不含離島）",
   phone: "037-742-518",
   phoneHref: "037742518",
   address: "358 苗栗縣苑裡鎮山脚里5之1號",
@@ -24,21 +24,21 @@ const products = [
     tag: "產品類別",
     description:
       "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "預約試躺", "全台配送"],
+    features: ["自家工廠製作", "預約試躺", "本島配送"],
   },
   {
     name: "乳膠床墊",
     tag: "產品類別",
     description:
       "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "預約試躺", "全台配送"],
+    features: ["自家工廠製作", "預約試躺", "本島配送"],
   },
   {
     name: "客製尺寸床墊",
     tag: "特殊尺寸",
     description:
       "可依床架與空間需求討論特殊尺寸，製作前會先確認尺寸、搬運條件與報價。",
-    features: ["特殊尺寸", "自家工廠製作", "全台配送"],
+    features: ["特殊尺寸", "自家工廠製作", "本島配送"],
   },
 ];
 
@@ -46,7 +46,7 @@ const steps = [
   ["01", "電話預約與詢問", "先確認來訪時間、床墊類別、尺寸與主要需求。"],
   ["02", "現場試躺討論", "到苑裡工廠了解產品，依實際展示與需求確認選擇。"],
   ["03", "自家工廠製作", "確認內容後由苑裡自家工廠安排製作。"],
-  ["04", "安排配送到家", "依配送地點與搬運條件安排，全台皆可洽詢。"],
+  ["04", "安排本島配送", "依地區與搬運條件，以自家車或貨運安排配送。"],
 ];
 
 const faqs = [
@@ -60,15 +60,23 @@ const faqs = [
   ],
   [
     "主要服務哪些客戶？",
-    "目前主要服務一般家庭、家具行與批發代工客戶，其他合作需求也可以電話洽詢。",
+    "目前主要服務一般家庭、家具行與批發代工客戶。",
   ],
   [
     "可以做特殊尺寸嗎？",
     "可以。請提供床架內徑、預計尺寸與搬運條件，工廠會先評估再確認製作與報價。",
   ],
   [
-    "是否提供全台配送與舊床回收？",
-    "提供全台配送洽詢，舊床回收可依地區、樓層與現場條件一併評估安排。",
+    "配送範圍包含離島嗎？",
+    "目前配送範圍為台灣本島，不包含離島；依地區以自家車或貨運安排。",
+  ],
+  [
+    "樓層搬運會另外收費嗎？",
+    "二樓及有電梯的大樓不加收費用；其他樓層、無電梯或特殊搬運情況，請在配送前先電話確認。",
+  ],
+  [
+    "舊床回收需要另外付費嗎？",
+    "舊床回收不另外加收費用，安排配送時可一併確認回收需求。",
   ],
 ];
 
@@ -158,7 +166,7 @@ export default function HomePage() {
             <a href="#products">床墊品項</a>
             <a href="#factory">工廠背景</a>
             <a href="#process">服務流程</a>
-            <a href="#custom">尺寸客製</a>
+            <a href="#delivery">配送服務</a>
             <a href="#contact">聯絡工廠</a>
           </nav>
 
@@ -189,7 +197,7 @@ export default function HomePage() {
               <ul className="trust-list" aria-label="服務特色">
                 <li>家族經營</li>
                 <li>自家工廠製作</li>
-                <li>尺寸客製</li>
+                <li>舊床免費回收</li>
                 <li>預約試躺</li>
               </ul>
             </div>
@@ -203,8 +211,8 @@ export default function HomePage() {
             <div className="container stats-row">
               <div><strong>家族自 1970 年製床</strong><span>延續至今的家族經營</span></div>
               <div><strong>苑裡自家工廠</strong><span>床墊由自家工廠製作</span></div>
-              <div><strong>多元服務客群</strong><span>家庭、家具行與批發代工</span></div>
-              <div><strong>全台配送</strong><span>可一併評估舊床回收</span></div>
+              <div><strong>本島配送</strong><span>不包含離島地區</span></div>
+              <div><strong>舊床免費回收</strong><span>配送時可一併安排</span></div>
             </div>
           </div>
         </section>
@@ -220,7 +228,7 @@ export default function HomePage() {
                 家族自 1970 年開始製作床墊，凱麗企業社目前仍由家族經營，床墊在苗栗縣苑裡鎮的自家工廠製作。
               </p>
               <p>
-                主要服務一般家庭、家具行與批發代工客戶；苗栗、台中為主要服務區域，也提供全台配送洽詢。
+                主要服務一般家庭、家具行與批發代工客戶；苗栗、台中為主要服務區域，也提供台灣本島配送。
               </p>
             </div>
           </div>
@@ -263,19 +271,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section material-section" id="materials">
+        <section className="section material-section" id="delivery">
           <div className="container material-grid">
             <div className="material-visual">
               <MattressCutaway />
             </div>
             <div className="material-copy">
-              <p className="section-kicker">PRODUCT INFORMATION</p>
-              <h2>規格尚未確認，就不先填入推測數字。</h2>
+              <p className="section-kicker">DELIVERY SERVICE</p>
+              <h2>配送與回收條件，先說清楚。</h2>
               <div className="material-list">
-                <div><span>01</span><h3>產品類別</h3><p>先確認是傳統連結式、獨立筒、乳膠或特殊尺寸需求。</p></div>
-                <div><span>02</span><h3>實際尺寸</h3><p>標準尺寸或床架內徑，都建議在製作與報價前再次確認。</p></div>
-                <div><span>03</span><h3>產品規格</h3><p>厚度、材料、軟硬與結構以現場產品及工廠說明為準。</p></div>
-                <div><span>04</span><h3>配送條件</h3><p>配送地點、樓層、電梯與舊床回收條件會一併評估。</p></div>
+                <div><span>01</span><h3>配送範圍</h3><p>配送範圍為台灣本島，目前不包含離島。</p></div>
+                <div><span>02</span><h3>配送方式</h3><p>依地區與訂單條件，由自家車或貨運安排配送。</p></div>
+                <div><span>03</span><h3>樓層費用</h3><p>二樓及有電梯大樓不加收費用；其他特殊搬運情況請先確認。</p></div>
+                <div><span>04</span><h3>舊床回收</h3><p>舊床回收不另外加收費用，可在安排配送時一併告知。</p></div>
               </div>
             </div>
           </div>
@@ -324,7 +332,7 @@ export default function HomePage() {
             <div>
               <p className="section-kicker">COMMON QUESTIONS</p>
               <h2>來訪與訂製前，可以先確認。</h2>
-              <p className="muted">產品規格、價格、配送與回收條件，請以電話或現場確認內容為準。</p>
+              <p className="muted">產品規格、價格、配送與搬運條件，請以電話或現場確認內容為準。</p>
             </div>
             <div className="faq-list">
               {faqs.map(([question, answer]) => (
@@ -342,7 +350,7 @@ export default function HomePage() {
             <div>
               <p className="section-kicker light">CONTACT THE FACTORY</p>
               <h2 className="light-text">預約試躺或合作洽詢，直接聯絡工廠。</h2>
-              <p>一般家庭、家具行、批發代工與其他合作需求，皆可先電話說明。</p>
+              <p>一般家庭、家具行與批發代工需求，皆可先電話說明。</p>
               <div className="contact-actions">
                 <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約／洽詢</a>
                 <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看 Google 地圖</a>
@@ -351,6 +359,9 @@ export default function HomePage() {
             <address>
               <div><span>工廠／試躺</span><strong><a href={site.mapUrl} target="_blank" rel="noreferrer">{site.address}</a></strong></div>
               <div><span>主要服務</span><strong>{site.city}；{site.serviceArea}</strong></div>
+              <div><span>配送方式</span><strong>依地區使用自家車或貨運</strong></div>
+              <div><span>搬運費用</span><strong>二樓及有電梯大樓不加收</strong></div>
+              <div><span>舊床回收</span><strong>不另外加收費用</strong></div>
               <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
               <div><span>營業時間</span><strong>{site.businessHours}，接受預約試躺</strong></div>
               <div><span>主要客戶</span><strong>一般家庭、家具行、批發代工</strong></div>
