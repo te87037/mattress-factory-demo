@@ -18,52 +18,81 @@ const site = {
   mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
 
+const advantages = [
+  {
+    number: "01",
+    title: "家族自 1970 年製床",
+    description: "1970 年代表家族開始製作床墊，目前仍由家族經營。",
+  },
+  {
+    number: "02",
+    title: "苑裡自家工廠",
+    description: "床墊由苗栗苑裡的自家工廠製作，可到現場了解與試躺。",
+  },
+  {
+    number: "03",
+    title: "台灣本島配送",
+    description: "依地區與訂單條件，以自家車或貨運安排；目前不含離島。",
+  },
+  {
+    number: "04",
+    title: "舊床免費回收",
+    description: "配送時可一併安排舊床回收，不另外加收回收費用。",
+  },
+];
+
 const products = [
   {
     name: "傳統連結式彈簧床",
     tag: "主打品項",
-    description:
-      "凱麗企業社目前主打的床墊類別，可到苑裡工廠試躺，再依實際需求確認規格與報價。",
+    description: "凱麗企業社目前主打的床墊類別，可到苑裡工廠試躺，再確認實際規格與報價。",
     features: ["主打品項", "自家工廠製作", "現場試躺"],
   },
   {
     name: "獨立筒床墊",
     tag: "產品類別",
-    description:
-      "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "現場試躺", "本島配送"],
+    description: "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格以電話或現場說明為準。",
+    features: ["規格現場確認", "現場試躺", "本島配送"],
   },
   {
     name: "乳膠床墊",
     tag: "產品類別",
-    description:
-      "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "現場試躺", "本島配送"],
+    description: "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格以電話或現場說明為準。",
+    features: ["規格現場確認", "現場試躺", "本島配送"],
   },
   {
     name: "客製尺寸床墊",
     tag: "特殊尺寸",
-    description:
-      "可依床架與空間需求討論特殊尺寸，製作前會先確認尺寸、搬運條件與報價。",
+    description: "可依床架與空間需求討論特殊尺寸，製作前先確認尺寸、搬運條件與報價。",
     features: ["特殊尺寸", "自家工廠製作", "本島配送"],
   },
 ];
 
+const deliveryItems = [
+  ["01", "配送範圍", "配送範圍為台灣本島，目前不包含離島。"],
+  ["02", "配送方式", "依地區與訂單條件，由自家車或貨運安排配送。"],
+  ["03", "樓層費用", "二樓及有電梯大樓不加收費用；其他特殊搬運情況請先確認。"],
+  ["04", "舊床回收", "舊床回收不另外加收費用，可在安排配送時一併告知。"],
+];
+
 const steps = [
-  ["01", "電話詢問或直接到訪", "可先電話說明床墊類別、尺寸與需求，也可於營業時間直接到工廠。"],
-  ["02", "現場試躺討論", "到苑裡工廠了解產品，依實際展示與需求確認選擇。"],
-  ["03", "自家工廠製作", "確認內容後由苑裡自家工廠安排製作。"],
-  ["04", "安排本島配送", "依地區與搬運條件，以自家車或貨運安排配送。"],
+  ["01", "先電話詢問或直接到訪", "可先說明床墊類別、尺寸與需求，也可於營業時間直接到工廠。"],
+  ["02", "現場了解與試躺", "建議提前預約，方便確認接待時間；未預約也可於營業時間到訪。"],
+  ["03", "確認訂單內容", "確認產品、尺寸、價格、訂金、付款方式與預計排程後再製作。"],
+  ["04", "製作與安排配送", "由苑裡自家工廠製作，再依地區以自家車或貨運配送。"],
+];
+
+const orderNotes = [
+  ["製作時間", "一般與客製床墊交期依款式、規格及工廠排程於下單時確認。"],
+  ["訂金", site.depositNotice],
+  ["付款方式", site.paymentMethods],
+  ["修改或取消", site.orderChangeNotice],
 ];
 
 const faqs = [
   [
     "凱麗企業社從 1970 年就成立了嗎？",
     "1970 年代表家族開始製作床墊；目前仍由家族經營。企業社實際設立年份未在網站上另行標示。",
-  ],
-  [
-    "床墊是在苑裡製作嗎？",
-    "是，床墊由苗栗苑裡的自家工廠製作，可到工廠了解產品與試躺。",
   ],
   [
     "試躺一定要提前預約嗎？",
@@ -76,22 +105,6 @@ const faqs = [
   [
     "床墊下單後多久可以完成？",
     "一般與客製尺寸床墊的製作時間目前不在網站公開，請依款式、規格與工廠排程於下單時確認。",
-  ],
-  [
-    "是否需要訂金？",
-    "是否收取訂金與金額，依每筆訂單內容確認。",
-  ],
-  [
-    "可以使用哪些付款方式？",
-    "可使用現金或銀行轉帳；其他付款方式依訂單確認。",
-  ],
-  [
-    "開始製作後可以修改尺寸或取消嗎？",
-    "需依實際需求、製作進度與訂單限制討論，無法一概保證可修改或取消。",
-  ],
-  [
-    "主要服務哪些客戶？",
-    "目前主要服務一般家庭、家具行與批發代工客戶。",
   ],
   [
     "可以做特殊尺寸嗎？",
@@ -121,19 +134,19 @@ function MattressCutaway() {
     >
       <defs>
         <linearGradient id="fabric" x1="0" x2="1">
-          <stop offset="0" stopColor="#f6efe3" />
-          <stop offset="1" stopColor="#e3d4bd" />
+          <stop offset="0" stopColor="#f8f1e6" />
+          <stop offset="1" stopColor="#dfceb6" />
         </linearGradient>
         <pattern id="stitch" width="28" height="28" patternUnits="userSpaceOnUse">
-          <path d="M0 14h28M14 0v28" stroke="#d5c3a8" strokeWidth="1" opacity=".45" />
+          <path d="M0 14h28M14 0v28" stroke="#ccb697" strokeWidth="1" opacity=".4" />
         </pattern>
       </defs>
       <ellipse cx="344" cy="454" rx="282" ry="36" fill="#0e1c24" opacity=".12" />
       <path d="M73 129 294 49l313 105-224 88z" fill="url(#fabric)" />
       <path d="M73 129 294 49l313 105-224 88z" fill="url(#stitch)" opacity=".75" />
-      <path d="M73 129v70l310 111v-68z" fill="#d7c4a8" />
-      <path d="M383 242 607 154v72L383 310z" fill="#b8986f" />
-      <path d="M82 205 383 314l218-84v44l-218 84L82 248z" fill="#f0b24a" />
+      <path d="M73 129v70l310 111v-68z" fill="#d5c1a4" />
+      <path d="M383 242 607 154v72L383 310z" fill="#ad8962" />
+      <path d="M82 205 383 314l218-84v44l-218 84L82 248z" fill="#efb247" />
       <path d="M82 252 383 362l218-84v103l-218 84L82 354z" fill="#f7f1e8" />
       <g fill="none" stroke="#b34735" strokeWidth="8">
         {Array.from({ length: 8 }).map((_, index) => {
@@ -147,14 +160,14 @@ function MattressCutaway() {
           );
         })}
       </g>
-      <path d="M82 354 383 465l218-84v32l-218 84L82 386z" fill="#19313d" />
-      <g fontFamily="Arial, sans-serif" fontSize="17" fill="#19313d" fontWeight="700">
+      <path d="M82 354 383 465l218-84v32l-218 84L82 386z" fill="#18303b" />
+      <g fontFamily="Arial, sans-serif" fontSize="17" fill="#18303b" fontWeight="700">
         <text x="35" y="102">表布</text>
         <text x="529" y="211">舒適層</text>
         <text x="500" y="335">支撐核心</text>
         <text x="47" y="417">底層</text>
       </g>
-      <g stroke="#19313d" strokeWidth="2">
+      <g stroke="#18303b" strokeWidth="2">
         <path d="M93 107 190 94" />
         <path d="m520 217-53 25" />
         <path d="m495 340-43 24" />
@@ -166,16 +179,15 @@ function MattressCutaway() {
 
 function FactoryBadge() {
   return (
-    <svg viewBox="0 0 360 250" aria-hidden="true" className="factory-badge">
-      <rect x="22" y="111" width="316" height="111" rx="8" fill="#f5ead8" />
-      <path d="m22 111 82-49v49l77-49v49l76-49v49h81" fill="#c7654d" />
-      <rect x="54" y="139" width="62" height="83" fill="#19313d" />
-      <rect x="145" y="142" width="57" height="39" fill="#f0b24a" />
-      <rect x="228" y="142" width="76" height="39" fill="#f0b24a" />
-      <path d="M283 27h32v84h-32z" fill="#19313d" />
-      <path d="M275 27h48v17h-48z" fill="#c7654d" />
-      <circle cx="83" cy="180" r="13" fill="#f0b24a" />
-      <path d="M42 221h278" stroke="#19313d" strokeWidth="5" />
+    <svg viewBox="0 0 420 300" aria-hidden="true" className="factory-badge">
+      <circle cx="210" cy="150" r="132" fill="#f2dfbd" />
+      <path d="M66 133 154 79v54l83-54v54l82-54v54h49v112H66z" fill="#fffaf1" stroke="#18303b" strokeWidth="6" />
+      <rect x="101" y="169" width="70" height="76" fill="#18303b" />
+      <rect x="202" y="169" width="56" height="42" fill="#efb247" stroke="#18303b" strokeWidth="4" />
+      <rect x="284" y="169" width="56" height="42" fill="#efb247" stroke="#18303b" strokeWidth="4" />
+      <path d="M315 45h34v88h-34z" fill="#b84936" stroke="#18303b" strokeWidth="5" />
+      <path d="M304 45h56v18h-56z" fill="#18303b" />
+      <circle cx="136" cy="207" r="14" fill="#efb247" />
     </svg>
   );
 }
@@ -196,13 +208,13 @@ export default function HomePage() {
           <nav className="desktop-nav" aria-label="主要導覽">
             <a href="#products">床墊品項</a>
             <a href="#factory">工廠背景</a>
-            <a href="#process">服務流程</a>
-            <a href="#delivery">配送服務</a>
-            <a href="#contact">聯絡工廠</a>
+            <a href="#delivery">配送回收</a>
+            <a href="#process">試躺訂購</a>
+            <a href="#contact">聯絡資訊</a>
           </nav>
 
           <a className="button button-small button-primary" href={`tel:${site.phoneHref}`}>
-            電話預約試躺
+            電話洽詢
           </a>
         </div>
       </header>
@@ -211,57 +223,44 @@ export default function HomePage() {
         <section className="hero">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="eyebrow"><span />家族經營・苑裡自家工廠</div>
+              <p className="eyebrow"><span />苗栗苑裡・家族經營・自家工廠</p>
               <h1>
-                床墊就該
+                找床墊，
                 <br />
-                <em>睡得舒服，買得明白。</em>
+                <em>直接問製作的人。</em>
               </h1>
               <p className="hero-lead">
-                家族自 {site.heritageYear} 年開始製作床墊，目前仍由家族經營，並於苗栗苑裡自家工廠製作。
-                提供傳統連結式彈簧床、獨立筒、乳膠與客製尺寸床墊。
+                家族自 {site.heritageYear} 年開始製作床墊，目前仍由家族經營。
+                提供傳統連結式彈簧床、獨立筒、乳膠與客製尺寸床墊，可到苑裡工廠現場試躺。
               </p>
               <div className="hero-actions">
-                <a className="button button-primary" href={`tel:${site.phoneHref}`}>直接問工廠</a>
-                <a className="button button-secondary" href="#products">查看床墊品項</a>
+                <a className="button button-primary" href={`tel:${site.phoneHref}`}>撥打 {site.phone}</a>
+                <a className="button button-secondary" href={site.mapUrl} target="_blank" rel="noreferrer">查看工廠地圖</a>
               </div>
-              <ul className="trust-list" aria-label="服務特色">
-                <li>家族經營</li>
-                <li>自家工廠製作</li>
-                <li>舊床免費回收</li>
-                <li>現場試躺</li>
-              </ul>
+              <p className="hero-visit-note">
+                {site.businessDays} {site.businessHours}・{site.lunchBreak}・{site.holidayNotice}
+              </p>
             </div>
-            <div className="hero-visual">
+
+            <div className="hero-visual" aria-label="床墊工廠示意圖">
+              <div className="hero-visual-card">
+                <MattressCutaway />
+              </div>
               <div className="visual-note note-one">苑裡自家工廠製作</div>
-              <MattressCutaway />
               <div className="visual-note note-two">建議預約，也可直接到訪</div>
-            </div>
-          </div>
-          <div className="hero-bottom-bar">
-            <div className="container stats-row">
-              <div><strong>家族自 1970 年製床</strong><span>延續至今的家族經營</span></div>
-              <div><strong>週一至週日營業</strong><span>09:00–17:30，12:00–13:00 午休</span></div>
-              <div><strong>本島配送</strong><span>不包含離島地區</span></div>
-              <div><strong>舊床免費回收</strong><span>配送時可一併安排</span></div>
             </div>
           </div>
         </section>
 
-        <section className="section intro-section" id="factory">
-          <div className="container two-column intro-grid">
-            <div>
-              <p className="section-kicker">FAMILY BUSINESS</p>
-              <h2>從家族製床經驗，到苑裡自家工廠。</h2>
-            </div>
-            <div className="large-copy">
-              <p>
-                家族自 1970 年開始製作床墊，凱麗企業社目前仍由家族經營，床墊在苗栗縣苑裡鎮的自家工廠製作。
-              </p>
-              <p>
-                主要服務一般家庭、家具行與批發代工客戶；苗栗、台中為主要服務區域，也提供台灣本島配送。
-              </p>
-            </div>
+        <section className="advantage-section" aria-label="凱麗企業社四大特色">
+          <div className="container advantage-grid">
+            {advantages.map((item) => (
+              <article className="advantage-card" key={item.number}>
+                <span>{item.number}</span>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -269,32 +268,29 @@ export default function HomePage() {
           <div className="container">
             <div className="section-heading split-heading">
               <div>
-                <p className="section-kicker light">PRODUCT CATEGORIES</p>
-                <h2 className="light-text">目前提供的床墊品項。</h2>
+                <p className="section-kicker">PRODUCT CATEGORIES</p>
+                <h2>先看四種主要床墊品項。</h2>
               </div>
               <p>產品價格與詳細規格暫不公開，可電話詢問或到工廠試躺確認。</p>
             </div>
 
             <div className="product-grid">
               {products.map((product, index) => (
-                <article className="product-card" key={product.name}>
+                <article className={`product-card ${index === 0 ? "featured-product" : ""}`} key={product.name}>
                   <div className={`product-visual mattress-${index + 1}`}>
+                    <span className="product-index">0{index + 1}</span>
                     <span className="product-tag">{product.tag}</span>
-                    <div className="mini-mattress">
+                    <div className="mini-mattress" aria-hidden="true">
                       <span /><span /><span />
                     </div>
                   </div>
                   <div className="product-content">
-                    <div className="product-title-row">
-                      <h3>{product.name}</h3>
-                    </div>
+                    <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <ul>
                       {product.features.map((feature) => <li key={feature}>{feature}</li>)}
                     </ul>
-                    <div className="product-footer">
-                      <a href={`tel:${site.phoneHref}`}>電話詢問這一款 →</a>
-                    </div>
+                    <a className="product-link" href={`tel:${site.phoneHref}`}>電話詢問這一款 <span>→</span></a>
                   </div>
                 </article>
               ))}
@@ -302,32 +298,41 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section material-section" id="delivery">
-          <div className="container material-grid">
-            <div className="material-visual">
-              <MattressCutaway />
-            </div>
-            <div className="material-copy">
-              <p className="section-kicker">DELIVERY SERVICE</p>
-              <h2>配送與回收條件，先說清楚。</h2>
-              <div className="material-list">
-                <div><span>01</span><h3>配送範圍</h3><p>配送範圍為台灣本島，目前不包含離島。</p></div>
-                <div><span>02</span><h3>配送方式</h3><p>依地區與訂單條件，由自家車或貨運安排配送。</p></div>
-                <div><span>03</span><h3>樓層費用</h3><p>二樓及有電梯大樓不加收費用；其他特殊搬運情況請先確認。</p></div>
-                <div><span>04</span><h3>舊床回收</h3><p>舊床回收不另外加收費用，可在安排配送時一併告知。</p></div>
+        <section className="section factory-section" id="factory">
+          <div className="container factory-grid">
+            <div className="factory-visual">
+              <FactoryBadge />
+              <div className="factory-year">
+                <strong>{site.heritageYear}</strong>
+                <span>家族開始製作床墊</span>
               </div>
+            </div>
+            <div className="factory-copy">
+              <p className="section-kicker light">FAMILY BUSINESS</p>
+              <h2 className="light-text">不是只有賣床，床墊就在苑裡自家工廠製作。</h2>
+              <p>
+                家族自 1970 年開始製作床墊，凱麗企業社目前仍由家族經營。
+                主要服務一般家庭、家具行與批發代工客戶，產品可直接與工廠討論。
+              </p>
+              <div className="factory-audiences">
+                <span>一般家庭</span>
+                <span>家具行</span>
+                <span>批發代工</span>
+              </div>
+              <a className="button button-on-dark" href={`tel:${site.phoneHref}`}>直接聯絡工廠</a>
             </div>
           </div>
         </section>
 
-        <section className="section process-section" id="process">
+        <section className="section delivery-section" id="delivery">
           <div className="container">
-            <div className="section-heading centered">
-              <p className="section-kicker">HOW WE WORK</p>
-              <h2>從詢問到配送，四個步驟。</h2>
+            <div className="section-heading centered-heading">
+              <p className="section-kicker">DELIVERY &amp; RECYCLE</p>
+              <h2>配送與回收條件，先讓你看清楚。</h2>
+              <p>配送細節仍會依地點、樓層與現場搬運條件確認。</p>
             </div>
-            <div className="process-grid">
-              {steps.map(([number, title, description]) => (
+            <div className="delivery-grid">
+              {deliveryItems.map(([number, title, description]) => (
                 <article key={number}>
                   <span>{number}</span>
                   <h3>{title}</h3>
@@ -338,32 +343,50 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section custom-section" id="custom">
-          <div className="container custom-grid">
-            <div className="factory-card">
-              <FactoryBadge />
-              <div><strong>苑裡自家工廠製作</strong><span>家庭、家具行與批發代工皆可洽詢</span></div>
-            </div>
-            <div className="custom-copy">
-              <p className="section-kicker light">CUSTOM SIZE</p>
-              <h2 className="light-text">特殊尺寸，可直接和工廠討論。</h2>
-              <p>
-                請提供床架內徑、預計長寬、厚度需求與搬運條件，工廠會先評估製作方式與報價。
-              </p>
-              <div className="custom-points">
-                <span>特殊長寬</span><span>家庭需求</span><span>家具行合作</span><span>批發代工</span>
+        <section className="section process-section" id="process">
+          <div className="container">
+            <div className="section-heading split-heading process-heading">
+              <div>
+                <p className="section-kicker">VISIT &amp; ORDER</p>
+                <h2>從試躺、確認訂單，到配送。</h2>
               </div>
-              <a className="button button-on-dark" href={`tel:${site.phoneHref}`}>電話提供尺寸洽詢</a>
+              <p>{site.visitNotice}。產品規格、價格與交期在確認訂單時說明。</p>
+            </div>
+
+            <div className="process-grid">
+              {steps.map(([number, title, description]) => (
+                <article key={number}>
+                  <span>{number}</span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="order-panel">
+              <div className="order-panel-heading">
+                <p className="section-kicker light">ORDER NOTES</p>
+                <h3>下單前需要確認的事項</h3>
+              </div>
+              <div className="order-note-grid">
+                {orderNotes.map(([title, description]) => (
+                  <div key={title}>
+                    <span>{title}</span>
+                    <p>{description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="section faq-section">
+        <section className="section faq-section" id="faq">
           <div className="container faq-grid">
-            <div>
+            <div className="faq-intro">
               <p className="section-kicker">COMMON QUESTIONS</p>
-              <h2>來訪與訂製前，可以先確認。</h2>
-              <p className="muted">產品規格、價格、交期、付款與配送條件，可先電話詢問。</p>
+              <h2>來工廠前，先看常見問題。</h2>
+              <p className="muted">未公開的規格、價格、保固與交期，請以電話或現場確認內容為準。</p>
+              <a className="text-link" href={`tel:${site.phoneHref}`}>仍有問題？直接撥打 {site.phone} →</a>
             </div>
             <div className="faq-list">
               {faqs.map(([question, answer]) => (
@@ -378,31 +401,25 @@ export default function HomePage() {
 
         <section className="contact-section" id="contact">
           <div className="container contact-grid">
-            <div>
+            <div className="contact-copy">
               <p className="section-kicker light">CONTACT THE FACTORY</p>
-              <h2 className="light-text">預約試躺或合作洽詢，直接聯絡工廠。</h2>
-              <p>{site.visitNotice}。午休與國定假日請留意營業資訊。</p>
+              <h2 className="light-text">預約試躺、詢問床墊或合作代工，直接聯絡工廠。</h2>
+              <p>{site.visitNotice}。中午休息與國定假日請留意營業資訊。</p>
               <div className="contact-actions">
-                <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約／洽詢</a>
-                <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看 Google 地圖</a>
+                <a className="button button-accent" href={`tel:${site.phoneHref}`}>撥打 {site.phone}</a>
+                <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">Google 地圖導航</a>
               </div>
             </div>
-            <address>
-              <div><span>工廠／試躺</span><strong><a href={site.mapUrl} target="_blank" rel="noreferrer">{site.address}</a></strong></div>
-              <div><span>營業日</span><strong>{site.businessDays}</strong></div>
-              <div><span>營業時間</span><strong>{site.businessHours}</strong></div>
-              <div><span>午休時間</span><strong>{site.lunchBreak}</strong></div>
-              <div><span>國定假日</span><strong>{site.holidayNotice}</strong></div>
+
+            <address className="contact-card">
+              <div className="contact-card-primary">
+                <span>工廠／試躺地址</span>
+                <strong><a href={site.mapUrl} target="_blank" rel="noreferrer">{site.address}</a></strong>
+              </div>
+              <div><span>營業時間</span><strong>{site.businessDays} {site.businessHours}</strong><small>{site.lunchBreak}・{site.holidayNotice}</small></div>
               <div><span>現場試躺</span><strong>{site.visitNotice}</strong></div>
-              <div><span>主要服務</span><strong>{site.city}；{site.serviceArea}</strong></div>
-              <div><span>配送方式</span><strong>依地區使用自家車或貨運</strong></div>
-              <div><span>搬運費用</span><strong>二樓及有電梯大樓不加收</strong></div>
-              <div><span>舊床回收</span><strong>不另外加收費用</strong></div>
-              <div><span>訂金</span><strong>{site.depositNotice}</strong></div>
-              <div><span>付款方式</span><strong>{site.paymentMethods}</strong></div>
-              <div><span>訂單變更</span><strong>{site.orderChangeNotice}</strong></div>
-              <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
-              <div><span>主要客戶</span><strong>一般家庭、家具行、批發代工</strong></div>
+              <div><span>服務區域</span><strong>{site.city}；{site.serviceArea}</strong></div>
+              <div><span>電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
             </address>
           </div>
         </section>
@@ -419,8 +436,8 @@ export default function HomePage() {
       </footer>
 
       <div className="mobile-cta">
-        <a href={`tel:${site.phoneHref}`}>電話洽詢</a>
         <a href={site.mapUrl} target="_blank" rel="noreferrer">地圖導航</a>
+        <a href={`tel:${site.phoneHref}`}>電話洽詢</a>
       </div>
     </>
   );
