@@ -1,0 +1,42 @@
+name: Deploy Sanity Studio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      SANITY_STUDIO_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+      SANITY_STUDIO_DATASET: ${{ vars.SANITY_DATASET }}
+      SANITY_STUDIO_HOST: ${{ vars.SANITY_STUDIO_HOST }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify configuration
+        run: |
+          test -n "$SANITY_AUTH_TOKEN" || { echo "Missing SANITY_AUTH_TOKEN secret"; exit 1; }
+          test -n "$SANITY_STUDIO_PROJECT_ID" || { echo "Missing SANITY_PROJECT_ID variable"; exit 1; }
+          test -n "$SANITY_STUDIO_HOST" || { echo "Missing SANITY_STUDIO_HOST variable"; exit 1; }
+
+      - name: Install Studio dependencies
+        working-directory: studio
+        run: npm install
+
+      - name: Build Studio
+        working-directory: studio
+        run: npm run build
+
+      - name: Deploy Studio
+        working-directory: studio
+        run: npx sanity deploy --yes --title "凱麗企業社內容後台" --url "$SANITY_STUDIO_HOST"
