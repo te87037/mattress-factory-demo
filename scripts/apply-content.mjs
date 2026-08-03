@@ -3,7 +3,6 @@ import path from "node:path";
 
 const root = process.cwd();
 const pagePath = path.join(root, "app/page.tsx");
-const cssPath = path.join(root, "app/globals.css");
 const sitePath = path.join(root, "content/site.json");
 const productsPath = path.join(root, "content/products.json");
 
@@ -40,15 +39,15 @@ if (phoneHref.length < 7 || phoneHref.length > 15) {
   throw new Error("聯絡電話格式不正確。請輸入 7 至 15 位數字的電話號碼。");
 }
 
-const products = productSource.products;
-if (!Array.isArray(products) || products.length === 0) {
+const rawProducts = productSource.products;
+if (!Array.isArray(rawProducts) || rawProducts.length === 0) {
   throw new Error("content/products.json 至少需要一項產品。");
 }
 
-const allowedImage = /^(?:uploads\/products\/[^/]+\.(?:jpe?g|png|webp))?$/i;
+const allowedImage = /^uploads\/products\/[^/]+\.(?:jpe?g|png|webp)$/i;
 const ids = new Set();
 
-for (const [index, product] of products.entries()) {
+const products = rawProducts.map((product, index) => {
   for (const field of ["id", "name", "tag", "description"]) {
     if (typeof product[field] !== "string" || !product[field].trim()) {
       throw new Error(`第 ${index + 1} 項產品的 ${field} 必須是非空白文字。`);
@@ -60,8 +59,25 @@ for (const [index, product] of products.entries()) {
   }
   ids.add(product.id);
 
-  if (product.image && !allowedImage.test(product.image)) {
-    throw new Error(`產品「${product.name}」的照片路徑不合法。`);
+  const sourceImages = Array.isArray(product.images) ? product.images : [];
+  const legacyImages = product.image
+    ? [{src: product.image, alt: product.imageAlt || product.name}]
+    : [];
+  const images = (sourceImages.length > 0 ? sourceImages : legacyImages).map((image, imageIndex) => {
+    if (!image || typeof image.src !== "string" || !allowedImage.test(image.src)) {
+      throw new Error(`產品「${product.name}」的第 ${imageIndex + 1} 張照片路徑不合法。`);
+    }
+
+    return {
+      src: image.src,
+      alt: typeof image.alt === "string" && image.alt.trim()
+        ? image.alt.trim()
+        : product.name,
+    };
+  });
+
+  if (images.length > 8) {
+    throw new Error(`產品「${product.name}」最多只能有 8 張照片。`);
   }
 
   if (!Array.isArray(product.features) || product.features.some((item) => typeof item !== "string" || !item.trim())) {
@@ -71,7 +87,17 @@ for (const [index, product] of products.entries()) {
   if (typeof product.visible !== "boolean") {
     throw new Error(`產品「${product.name}」的 visible 必須是布林值。`);
   }
-}
+
+  return {
+    id: product.id.trim(),
+    visible: product.visible,
+    name: product.name.trim(),
+    tag: product.tag.trim(),
+    description: product.description.trim(),
+    images,
+    features: product.features.map((item) => item.trim()),
+  };
+});
 
 const site = {
   ...siteSource,
@@ -126,6 +152,11 @@ const faqs = [
 const serialize = (value) => JSON.stringify(value, null, 2);
 let page = fs.readFileSync(pagePath, "utf8");
 
+const carouselImport = 'import {ProductCarousel} from "./components/ProductCarousel";';
+if (!page.includes(carouselImport)) {
+  page = `${carouselImport}\n\n${page}`;
+}
+
 const generatedContent = `const site = ${serialize(site)};\n\nconst advantages = ${serialize(advantages)};\n\nconst products = ${serialize(products)}.filter((product) => product.visible);\n\nconst deliveryItems = ${serialize(deliveryItems)};`;
 
 const contentPattern = /const site = \{[\s\S]*?const deliveryItems = \[[\s\S]*?\n\];/;
@@ -146,23 +177,18 @@ page = page.replace(
   `家族自 ${site.heritageYear} 年開始製作床墊，${site.brand}目前仍由家族經營。`,
 );
 
-if (!page.includes('className="product-photo"')) {
+page = page.replace("先看四種主要床墊品項。", "查看目前提供的床墊品項。");
+
+if (!page.includes("<ProductCarousel")) {
   const oldVisual = `                  <div className={\`product-visual mattress-\${index + 1}\`}>\n                    <span className="product-index">0{index + 1}</span>\n                    <span className="product-tag">{product.tag}</span>\n                    <div className="mini-mattress" aria-hidden="true">\n                      <span /><span /><span />\n                    </div>\n                  </div>`;
-  const newVisual = `                  <div className={\`product-visual mattress-\${index + 1} \${product.image ? "has-photo" : ""}\`}>\n                    <span className="product-index">0{index + 1}</span>\n                    <span className="product-tag">{product.tag}</span>\n                    {product.image ? (\n                      <img\n                        className="product-photo"\n                        src={product.image}\n                        alt={product.imageAlt || product.name}\n                        loading="lazy"\n                      />\n                    ) : (\n                      <div className="mini-mattress" aria-hidden="true">\n                        <span /><span /><span />\n                      </div>\n                    )}\n                  </div>`;
+  const newVisual = `                  <ProductCarousel\n                    images={product.images}\n                    productName={product.name}\n                    tag={product.tag}\n                    index={index}\n                  />`;
 
   if (!page.includes(oldVisual)) {
-    throw new Error("找不到產品圖片區塊，無法啟用照片顯示。");
+    throw new Error("找不到產品圖片區塊，無法啟用多圖輪播。");
   }
   page = page.replace(oldVisual, newVisual);
 }
 
 fs.writeFileSync(pagePath, page);
-
-let css = fs.readFileSync(cssPath, "utf8");
-const cssMarker = "/* CMS_PRODUCT_PHOTO_STYLES */";
-if (!css.includes(cssMarker)) {
-  css += `\n\n${cssMarker}\n.product-visual.has-photo { background: #d9d5c9; }\n.product-photo { width: 100%; height: 100%; min-height: inherit; object-fit: cover; display: block; }\n.product-visual.has-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,34,44,.08), rgba(14,34,44,.22)); pointer-events: none; }\n.product-visual.has-photo .product-index,\n.product-visual.has-photo .product-tag { z-index: 2; }\n`;
-  fs.writeFileSync(cssPath, css);
-}
 
 console.log(`CMS content applied: ${products.filter((product) => product.visible).length} visible products.`);
