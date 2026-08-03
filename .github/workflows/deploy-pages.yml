@@ -7,7 +7,7 @@ on:
   repository_dispatch:
     types: [sanity-content-update]
   schedule:
-    - cron: "17 * * * *"
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: read
