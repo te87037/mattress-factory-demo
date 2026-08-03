@@ -1,0 +1,140 @@
+media:
+  - name: product_images
+    label: 產品照片
+    input: public/uploads/products
+    output: uploads/products
+    rename: random
+    extensions: [jpg, jpeg, png, webp]
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "CMS：新增 {path}"
+      update: "CMS：更新 {path}"
+      delete: "CMS：刪除 {path}"
+      rename: "CMS：重新命名 {oldPath} 為 {newPath}"
+
+content:
+  - name: contact
+    label: 聯絡與營業資訊
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: brand
+        label: 公司名稱
+        type: string
+        required: true
+      - name: brandMark
+        label: 品牌縮寫
+        type: string
+        required: true
+      - name: phone
+        label: 聯絡電話
+        type: string
+        required: true
+      - name: address
+        label: 工廠與試躺地址
+        type: string
+        required: true
+      - name: city
+        label: 主要服務區域
+        type: string
+        required: true
+      - name: serviceArea
+        label: 配送範圍
+        type: string
+        required: true
+      - name: businessDays
+        label: 營業日
+        type: string
+        required: true
+      - name: businessHours
+        label: 營業時間
+        type: string
+        required: true
+      - name: lunchBreak
+        label: 午休時間
+        type: string
+        required: true
+      - name: holidayNotice
+        label: 國定假日說明
+        type: string
+        required: true
+      - name: visitNotice
+        label: 現場試躺說明
+        type: text
+        required: true
+      - name: depositNotice
+        label: 訂金說明
+        type: text
+        required: true
+      - name: paymentMethods
+        label: 付款方式
+        type: text
+        required: true
+      - name: orderChangeNotice
+        label: 修改或取消說明
+        type: text
+        required: true
+      - name: heritageYear
+        label: 家族開始製床年份
+        type: string
+        required: true
+
+  - name: products
+    label: 床墊產品
+    type: file
+    path: content/products.json
+    format: json
+    fields:
+      - name: products
+        label: 產品列表
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: id
+            label: 系統識別碼
+            type: string
+            readonly: true
+            required: true
+          - name: visible
+            label: 顯示在官網
+            type: boolean
+            required: true
+          - name: name
+            label: 產品名稱
+            type: string
+            required: true
+          - name: tag
+            label: 產品標籤
+            type: string
+            required: true
+          - name: description
+            label: 產品描述
+            type: text
+            required: true
+          - name: image
+            label: 產品照片
+            type: image
+            required: false
+            options:
+              media: product_images
+              extensions: [jpg, jpeg, png, webp]
+              rename: random
+          - name: imageAlt
+            label: 照片替代文字
+            type: string
+            required: false
+          - name: features
+            label: 產品特色
+            type: string
+            list: true
+            required: true
