@@ -21,14 +21,11 @@
 3. Dataset 使用 `production`，並維持 Public。
 4. 記下 Project ID。
 
-### 2. 建立 Sanity Token
+### 2. 建立一個 Sanity Token
 
-在 Sanity 專案的 API Tokens 建立：
+在 Sanity 專案的 API Tokens 建立一個具備內容寫入及 Studio 部署權限的 Token，名稱可填「GitHub Actions」。
 
-- `SANITY_AUTH_TOKEN`：供 GitHub Actions 部署 Studio。
-- `SANITY_WRITE_TOKEN`：供首次匯入既有網站內容。
-
-Token 只放在 GitHub Actions Secrets，不寫入程式碼。
+建議設定到期日，並只將 Token 儲存在 GitHub Actions Secret。Token 不可貼入聊天、Issue、程式碼或一般文件。
 
 ### 3. 設定 GitHub Actions Variables
 
@@ -42,14 +39,13 @@ Repository Settings → Secrets and variables → Actions → Variables：
 
 `https://kaili-mattress-admin.sanity.studio`
 
-### 4. 設定 GitHub Actions Secrets
+### 4. 設定 GitHub Actions Secret
 
 Repository Settings → Secrets and variables → Actions → Secrets：
 
-- `SANITY_AUTH_TOKEN`
-- `SANITY_WRITE_TOKEN`
+- `SANITY_TOKEN`：貼入新建立的 Sanity Token
 
-Public dataset 不需要 `SANITY_API_READ_TOKEN`。若日後改成 Private dataset，再建立唯讀 Token 並新增該 Secret。
+Public dataset 不需要 `SANITY_API_READ_TOKEN`。若日後改成 Private dataset，再建立唯讀 Token並新增該 Secret。
 
 ### 5. 匯入目前網站資料
 
