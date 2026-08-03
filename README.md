@@ -46,7 +46,7 @@ npm run dev
 
 `next.config.ts` 會在 GitHub Actions 中自動套用 repository `basePath`，本機開發則維持 `/`。
 
-部署觸發紀錄：2026-08-03 11:57 Asia/Taipei
+部署觸發紀錄：2026-08-03 13:04 Asia/Taipei
 
 ## 正式上線前應替換
 
