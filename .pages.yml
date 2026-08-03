@@ -18,6 +18,17 @@ settings:
       delete: "CMS：刪除 {path}"
       rename: "CMS：重新命名 {oldPath} 為 {newPath}"
 
+actions:
+  - name: submit-review
+    label: 送出審核
+    workflow: cms-submit-review.yml
+    ref: current
+    cancelable: false
+    confirm:
+      title: 送出網站內容審核？
+      message: 系統會建立或更新一個合併至 main 的 Pull Request，正式官網不會立即改變。
+      button: 送出審核
+
 content:
   - name: contact
     label: 聯絡與營業資訊
