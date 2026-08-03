@@ -11,6 +11,9 @@ const site = {
   lunchBreak: "12:00–13:00 午休",
   holidayNotice: "國定假日休息",
   visitNotice: "建議提前預約，也可直接到訪",
+  depositNotice: "依每筆訂單內容確認",
+  paymentMethods: "現金、銀行轉帳；其他方式依訂單確認",
+  orderChangeNotice: "依需求、製作進度與訂單限制討論",
   heritageYear: "1970",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
@@ -69,6 +72,22 @@ const faqs = [
   [
     "營業時間是什麼時候？",
     "週一至週日 09:00–17:30，12:00–13:00 午休；國定假日休息。",
+  ],
+  [
+    "床墊下單後多久可以完成？",
+    "一般與客製尺寸床墊的製作時間目前不在網站公開，請依款式、規格與工廠排程於下單時確認。",
+  ],
+  [
+    "是否需要訂金？",
+    "是否收取訂金與金額，依每筆訂單內容確認。",
+  ],
+  [
+    "可以使用哪些付款方式？",
+    "可使用現金或銀行轉帳；其他付款方式依訂單確認。",
+  ],
+  [
+    "開始製作後可以修改尺寸或取消嗎？",
+    "需依實際需求、製作進度與訂單限制討論，無法一概保證可修改或取消。",
   ],
   [
     "主要服務哪些客戶？",
@@ -344,7 +363,7 @@ export default function HomePage() {
             <div>
               <p className="section-kicker">COMMON QUESTIONS</p>
               <h2>來訪與訂製前，可以先確認。</h2>
-              <p className="muted">產品規格、價格、營業時間與配送條件，可先電話詢問。</p>
+              <p className="muted">產品規格、價格、交期、付款與配送條件，可先電話詢問。</p>
             </div>
             <div className="faq-list">
               {faqs.map(([question, answer]) => (
@@ -379,6 +398,9 @@ export default function HomePage() {
               <div><span>配送方式</span><strong>依地區使用自家車或貨運</strong></div>
               <div><span>搬運費用</span><strong>二樓及有電梯大樓不加收</strong></div>
               <div><span>舊床回收</span><strong>不另外加收費用</strong></div>
+              <div><span>訂金</span><strong>{site.depositNotice}</strong></div>
+              <div><span>付款方式</span><strong>{site.paymentMethods}</strong></div>
+              <div><span>訂單變更</span><strong>{site.orderChangeNotice}</strong></div>
               <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
               <div><span>主要客戶</span><strong>一般家庭、家具行、批發代工</strong></div>
             </address>
