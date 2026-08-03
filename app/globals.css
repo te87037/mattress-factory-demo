@@ -100,12 +100,13 @@ h2 { font-size: clamp(36px, 4.5vw, 58px); line-height: 1.2; letter-spacing: -.03
 .section-heading { margin-bottom: 45px; }
 .split-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
 .split-heading > p { max-width: 360px; color: rgba(255,255,255,.58); }
-.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .product-card { background: var(--paper); border-radius: 9px; overflow: hidden; }
 .product-visual { min-height: 235px; position: relative; display: grid; place-items: center; overflow: hidden; }
 .mattress-1 { background: #eadac3; }
 .mattress-2 { background: #d8e2df; }
 .mattress-3 { background: #e8d3cb; }
+.mattress-4 { background: #d9d5c9; }
 .product-tag { position: absolute; top: 18px; left: 18px; background: var(--brick); color: white; padding: 6px 10px; border-radius: 4px; font-size: 12px; font-weight: 900; }
 .mini-mattress { width: 72%; transform: perspective(500px) rotateX(56deg) rotateZ(-8deg); filter: drop-shadow(15px 24px 11px rgba(24,48,59,.18)); }
 .mini-mattress span { display: block; height: 35px; border: 3px solid var(--ink); }
