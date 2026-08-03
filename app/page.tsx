@@ -10,34 +10,42 @@ const site = {
   foundedYear: "1970",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
-
 const products = [
   {
-    name: "日常好睡款",
-    tag: "最多家庭選擇",
-    firmness: "適中 6／10",
-    price: "價格請來電洽詢",
+    name: "傳統連結式彈簧床",
+    tag: "主打款",
+    firmness: "整體支撐",
+    price: "起價請來電洽詢",
     description:
-      "獨立筒搭配高密度舒適層，支撐明確、不會過硬，適合仰睡與側睡交替。",
-    features: ["蜂巢式獨立筒", "高密度泡棉", "透氣針織布"],
+      "凱麗企業社的主打床款，採傳統連結式彈簧結構，睡感穩定、支撐明確，適合偏好扎實承托感的家庭。",
+    features: ["連結式彈簧", "扎實支撐", "可預約試躺"],
   },
   {
-    name: "硬挺支撐款",
-    tag: "偏硬睡感",
-    firmness: "偏硬 8／10",
-    price: "價格請來電洽詢",
+    name: "獨立筒床墊",
+    tag: "降低翻身干擾",
+    firmness: "多種睡感",
+    price: "起價請來電洽詢",
     description:
-      "降低深陷感並加強腰臀承托，適合喜歡硬挺感、體型較壯或容易翻身的人。",
-    features: ["加強型獨立筒", "高支撐泡棉", "四周護邊"],
+      "每顆彈簧各自受力，能降低同床翻身時的牽動感；實際軟硬度與舒適層可依需求現場比較。",
+    features: ["獨立筒結構", "減少相互干擾", "軟硬可諮詢"],
   },
   {
-    name: "柔感減壓款",
-    tag: "側睡友善",
-    firmness: "偏軟 4／10",
-    price: "價格請來電洽詢",
+    name: "乳膠床墊",
+    tag: "彈性貼合",
+    firmness: "依規格選擇",
+    price: "起價請來電洽詢",
     description:
-      "肩臀能適度下沉，減少側睡壓迫感，同時保留穩定支撐，不是整張軟趴趴。",
-    features: ["減壓舒適層", "分區獨立筒", "親膚涼感表布"],
+      "提供乳膠材質床墊選擇，著重彈性與貼合感；厚度、結構與適合的睡感可於預約試躺時確認。",
+    features: ["乳膠材質", "彈性貼合", "規格可諮詢"],
+  },
+  {
+    name: "客製尺寸床墊",
+    tag: "特殊尺寸",
+    firmness: "依需求製作",
+    price: "起價請來電洽詢",
+    description:
+      "適用於特殊床架、和室、上下舖、民宿與其他非標準空間，提供尺寸、厚度及搬運條件評估。",
+    features: ["特殊長寬", "厚度可討論", "全台配送評估"],
   },
 ];
 
@@ -145,7 +153,7 @@ export default function HomePage() {
             <span className="brand-mark">{site.brandMark}</span>
             <span>
               <strong>{site.brand}</strong>
-              <small>MATTRESS FACTORY · SINCE {site.foundedYear}</small>
+              <small>EST. {site.foundedYear} · FACTORY DIRECT</small>
             </span>
           </a>
 
@@ -167,22 +175,22 @@ export default function HomePage() {
         <section className="hero">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="eyebrow"><span />1970 年起，在苑裡做床墊</div>
+              <div className="eyebrow"><span />工廠自己做，規格直接說</div>
               <h1>
                 床墊就該
                 <br />
                 <em>睡得舒服，買得明白。</em>
               </h1>
               <p className="hero-lead">
-                從彈簧、泡棉到表布，我們把床墊裡面有什麼、為什麼這樣搭配，清楚告訴你。
-                不包裝話術，不一直推高價款，先找到適合你的支撐。
+                凱麗企業社自 1970 年在苗栗苑裡製作床墊，提供傳統連結式彈簧床、獨立筒、乳膠與客製尺寸床墊。
+                可先預約試躺，再依睡感、尺寸與預算選擇。
               </p>
               <div className="hero-actions">
-                <a className="button button-primary" href={`tel:${site.phoneHref}`}>電話詢問工廠</a>
+                <a className="button button-primary" href={`tel:${site.phoneHref}`}>直接問工廠</a>
                 <a className="button button-secondary" href="#products">先看床墊款式</a>
               </div>
               <ul className="trust-list" aria-label="服務特色">
-                <li>價格公開</li>
+                <li>起價透明</li>
                 <li>材料說明</li>
                 <li>尺寸客製</li>
                 <li>預約試躺</li>
@@ -196,10 +204,10 @@ export default function HomePage() {
           </div>
           <div className="hero-bottom-bar">
             <div className="container stats-row">
-              <div><strong>工廠直營</strong><span>少一層轉手，多一分透明</span></div>
-              <div><strong>預約試躺</strong><span>營業時間 09:00–17:30</span></div>
-              <div><strong>苗栗・台中服務</strong><span>標準與特殊尺寸都能討論</span></div>
-              <div><strong>全台配送</strong><span>可協助舊床回收安排</span></div>
+              <div><strong>1970 年創立</strong><span>在苗栗苑裡長期製作床墊</span></div>
+              <div><strong>預約試躺</strong><span>09:00–17:30，來訪前先電話確認</span></div>
+              <div><strong>尺寸客製</strong><span>標準與特殊尺寸都能討論</span></div>
+              <div><strong>全台配送</strong><span>可一併評估舊床回收</span></div>
             </div>
           </div>
         </section>
@@ -212,11 +220,11 @@ export default function HomePage() {
             </div>
             <div className="large-copy">
               <p>
-                凱麗企業社自 1970 年在苗栗苑裡製作床墊。你問床墊裡面放什麼，我們回答得出來；
-                你說睡起來哪裡不舒服，我們也知道該從哪一層調整。
+                凱麗企業社創立於 1970 年，工廠位於苗栗縣苑裡鎮。從傳統連結式彈簧床到獨立筒、
+                乳膠與特殊尺寸，都能直接與工廠討論。
               </p>
               <p>
-                我們把通路成本省下來，但不把該有的材料、品檢與售後省掉。價格可以實在，規格也要講明白。
+                我們主要服務苗栗、台中，並提供全台配送與舊床回收評估。看得到工廠、找得到人，規格與費用在製作前說清楚。
               </p>
             </div>
           </div>
@@ -229,7 +237,7 @@ export default function HomePage() {
                 <p className="section-kicker light">POPULAR MODELS</p>
                 <h2 className="light-text">先從你喜歡的睡感開始。</h2>
               </div>
-              <p>產品名稱、完整規格與各尺寸價格將依實際資料更新；目前請來電確認。</p>
+              <p>提供四大類床墊選擇；各款起價與詳細規格會依下一階段資料陸續補齊。</p>
             </div>
 
             <div className="product-grid">
@@ -344,15 +352,14 @@ export default function HomePage() {
               <p>告訴我們身高體重、主要睡姿、尺寸與預算，工廠會先幫你縮小範圍。</p>
               <div className="contact-actions">
                 <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約試躺</a>
-                <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看工廠位置</a>
+                <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看 Google 地圖</a>
               </div>
             </div>
             <address>
-              <div><span>展示／工廠</span><strong>{site.address}</strong></div>
-              <div><span>主要服務區域</span><strong>{site.city}，{site.serviceArea}</strong></div>
+              <div><span>工廠／試躺</span><strong><a href={site.mapUrl} target="_blank" rel="noreferrer">{site.address}</a></strong></div>
+              <div><span>主要服務</span><strong>{site.city}；{site.serviceArea}</strong></div>
               <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
-              <div><span>營業時間</span><strong>{site.businessHours}，建議先電話預約試躺</strong></div>
-              <div><span>其他服務</span><strong>特殊尺寸可討論，提供舊床回收安排</strong></div>
+              <div><span>營業時間</span><strong>{site.businessHours}，接受預約試躺</strong></div>
             </address>
           </div>
         </section>
@@ -362,15 +369,15 @@ export default function HomePage() {
         <div className="container footer-row">
           <div className="brand footer-brand">
             <span className="brand-mark">{site.brandMark}</span>
-            <span><strong>{site.brand}</strong><small>苗栗苑裡床墊工廠 · {site.foundedYear} 年創立</small></span>
+            <span><strong>{site.brand}</strong><small>苗栗苑裡床墊工廠 · 創立於 {site.foundedYear}</small></span>
           </div>
-          <p>© {new Date().getFullYear()} {site.brand} · All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {site.brand} · 苗栗苑裡床墊工廠</p>
         </div>
       </footer>
 
       <div className="mobile-cta">
-        <a href={`tel:${site.phoneHref}`}>電話詢問</a>
-        <a href={site.mapUrl} target="_blank" rel="noreferrer">工廠位置</a>
+        <a href={`tel:${site.phoneHref}`}>電話預約</a>
+        <a href={site.mapUrl} target="_blank" rel="noreferrer">地圖導航</a>
       </div>
     </>
   );
