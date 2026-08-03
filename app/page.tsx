@@ -6,7 +6,11 @@ const site = {
   phone: "037-742-518",
   phoneHref: "037742518",
   address: "358 苗栗縣苑裡鎮山脚里5之1號",
+  businessDays: "週一至週日",
   businessHours: "09:00–17:30",
+  lunchBreak: "12:00–13:00 午休",
+  holidayNotice: "國定假日休息",
+  visitNotice: "建議提前預約，也可直接到訪",
   heritageYear: "1970",
   mapUrl: "https://www.google.com/maps/search/?api=1&query=358苗栗縣苑裡鎮山脚里5之1號",
 };
@@ -16,22 +20,22 @@ const products = [
     name: "傳統連結式彈簧床",
     tag: "主打品項",
     description:
-      "凱麗企業社目前主打的床墊類別，可先電話預約到工廠試躺，再依實際需求確認規格與報價。",
-    features: ["主打品項", "自家工廠製作", "預約試躺"],
+      "凱麗企業社目前主打的床墊類別，可到苑裡工廠試躺，再依實際需求確認規格與報價。",
+    features: ["主打品項", "自家工廠製作", "現場試躺"],
   },
   {
     name: "獨立筒床墊",
     tag: "產品類別",
     description:
       "提供獨立筒床墊選擇，實際結構、尺寸、軟硬與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "預約試躺", "本島配送"],
+    features: ["自家工廠製作", "現場試躺", "本島配送"],
   },
   {
     name: "乳膠床墊",
     tag: "產品類別",
     description:
       "提供乳膠床墊選擇，實際厚度、結構、尺寸與價格請於電話或現場諮詢確認。",
-    features: ["自家工廠製作", "預約試躺", "本島配送"],
+    features: ["自家工廠製作", "現場試躺", "本島配送"],
   },
   {
     name: "客製尺寸床墊",
@@ -43,7 +47,7 @@ const products = [
 ];
 
 const steps = [
-  ["01", "電話預約與詢問", "先確認來訪時間、床墊類別、尺寸與主要需求。"],
+  ["01", "電話詢問或直接到訪", "可先電話說明床墊類別、尺寸與需求，也可於營業時間直接到工廠。"],
   ["02", "現場試躺討論", "到苑裡工廠了解產品，依實際展示與需求確認選擇。"],
   ["03", "自家工廠製作", "確認內容後由苑裡自家工廠安排製作。"],
   ["04", "安排本島配送", "依地區與搬運條件，以自家車或貨運安排配送。"],
@@ -56,7 +60,15 @@ const faqs = [
   ],
   [
     "床墊是在苑裡製作嗎？",
-    "是，床墊由苗栗苑裡的自家工廠製作，歡迎先電話預約來訪與試躺。",
+    "是，床墊由苗栗苑裡的自家工廠製作，可到工廠了解產品與試躺。",
+  ],
+  [
+    "試躺一定要提前預約嗎？",
+    "不用。建議提前電話預約，方便工廠確認接待時間；營業時間內也可以直接到訪。",
+  ],
+  [
+    "營業時間是什麼時候？",
+    "週一至週日 09:00–17:30，12:00–13:00 午休；國定假日休息。",
   ],
   [
     "主要服務哪些客戶？",
@@ -198,19 +210,19 @@ export default function HomePage() {
                 <li>家族經營</li>
                 <li>自家工廠製作</li>
                 <li>舊床免費回收</li>
-                <li>預約試躺</li>
+                <li>現場試躺</li>
               </ul>
             </div>
             <div className="hero-visual">
               <div className="visual-note note-one">苑裡自家工廠製作</div>
               <MattressCutaway />
-              <div className="visual-note note-two">來訪前可先電話預約</div>
+              <div className="visual-note note-two">建議預約，也可直接到訪</div>
             </div>
           </div>
           <div className="hero-bottom-bar">
             <div className="container stats-row">
               <div><strong>家族自 1970 年製床</strong><span>延續至今的家族經營</span></div>
-              <div><strong>苑裡自家工廠</strong><span>床墊由自家工廠製作</span></div>
+              <div><strong>週一至週日營業</strong><span>09:00–17:30，12:00–13:00 午休</span></div>
               <div><strong>本島配送</strong><span>不包含離島地區</span></div>
               <div><strong>舊床免費回收</strong><span>配送時可一併安排</span></div>
             </div>
@@ -241,7 +253,7 @@ export default function HomePage() {
                 <p className="section-kicker light">PRODUCT CATEGORIES</p>
                 <h2 className="light-text">目前提供的床墊品項。</h2>
               </div>
-              <p>產品價格與詳細規格暫不公開，請電話預約試躺或直接向工廠確認。</p>
+              <p>產品價格與詳細規格暫不公開，可電話詢問或到工廠試躺確認。</p>
             </div>
 
             <div className="product-grid">
@@ -332,7 +344,7 @@ export default function HomePage() {
             <div>
               <p className="section-kicker">COMMON QUESTIONS</p>
               <h2>來訪與訂製前，可以先確認。</h2>
-              <p className="muted">產品規格、價格、配送與搬運條件，請以電話或現場確認內容為準。</p>
+              <p className="muted">產品規格、價格、營業時間與配送條件，可先電話詢問。</p>
             </div>
             <div className="faq-list">
               {faqs.map(([question, answer]) => (
@@ -350,7 +362,7 @@ export default function HomePage() {
             <div>
               <p className="section-kicker light">CONTACT THE FACTORY</p>
               <h2 className="light-text">預約試躺或合作洽詢，直接聯絡工廠。</h2>
-              <p>一般家庭、家具行與批發代工需求，皆可先電話說明。</p>
+              <p>{site.visitNotice}。午休與國定假日請留意營業資訊。</p>
               <div className="contact-actions">
                 <a className="button button-accent" href={`tel:${site.phoneHref}`}>電話預約／洽詢</a>
                 <a className="button button-outline-light" href={site.mapUrl} target="_blank" rel="noreferrer">查看 Google 地圖</a>
@@ -358,12 +370,16 @@ export default function HomePage() {
             </div>
             <address>
               <div><span>工廠／試躺</span><strong><a href={site.mapUrl} target="_blank" rel="noreferrer">{site.address}</a></strong></div>
+              <div><span>營業日</span><strong>{site.businessDays}</strong></div>
+              <div><span>營業時間</span><strong>{site.businessHours}</strong></div>
+              <div><span>午休時間</span><strong>{site.lunchBreak}</strong></div>
+              <div><span>國定假日</span><strong>{site.holidayNotice}</strong></div>
+              <div><span>現場試躺</span><strong>{site.visitNotice}</strong></div>
               <div><span>主要服務</span><strong>{site.city}；{site.serviceArea}</strong></div>
               <div><span>配送方式</span><strong>依地區使用自家車或貨運</strong></div>
               <div><span>搬運費用</span><strong>二樓及有電梯大樓不加收</strong></div>
               <div><span>舊床回收</span><strong>不另外加收費用</strong></div>
               <div><span>聯絡電話</span><strong><a href={`tel:${site.phoneHref}`}>{site.phone}</a></strong></div>
-              <div><span>營業時間</span><strong>{site.businessHours}，接受預約試躺</strong></div>
               <div><span>主要客戶</span><strong>一般家庭、家具行、批發代工</strong></div>
             </address>
           </div>
