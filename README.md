@@ -38,12 +38,15 @@ npm run dev
 
 ## GitHub Pages
 
-1. 建立 GitHub repository，將本專案推到 `main`。
-2. Repository → **Settings** → **Pages**。
-3. Source 選擇 **GitHub Actions**。
-4. 推送後，`.github/workflows/deploy-pages.yml` 會自動建置及部署。
+1. Repository → **Settings** → **Pages**。
+2. Source 選擇 **GitHub Actions**。
+3. `.github/workflows/deploy-pages.yml` 會自動建置及部署。
+
+網站網址：`https://te87037.github.io/mattress-factory-demo/`
 
 `next.config.ts` 會在 GitHub Actions 中自動套用 repository `basePath`，本機開發則維持 `/`。
+
+部署觸發紀錄：2026-08-03 11:57 Asia/Taipei
 
 ## 正式上線前應替換
 
