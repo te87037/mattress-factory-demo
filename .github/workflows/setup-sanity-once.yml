@@ -13,8 +13,9 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     env:
-      SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
-      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+      SANITY_WRITE_TOKEN: ${{ secrets.SANITY_TOKEN }}
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN }}
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET }}
       SANITY_STUDIO_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
@@ -31,8 +32,7 @@ jobs:
 
       - name: Verify configuration
         run: |
-          test -n "$SANITY_WRITE_TOKEN" || { echo "Missing SANITY_WRITE_TOKEN secret"; exit 1; }
-          test -n "$SANITY_AUTH_TOKEN" || { echo "Missing SANITY_AUTH_TOKEN secret"; exit 1; }
+          test -n "$SANITY_TOKEN" || { echo "Missing SANITY_TOKEN secret"; exit 1; }
           test -n "$SANITY_PROJECT_ID" || { echo "Missing SANITY_PROJECT_ID variable"; exit 1; }
           test -n "$SANITY_DATASET" || { echo "Missing SANITY_DATASET variable"; exit 1; }
           test -n "$SANITY_STUDIO_HOST" || { echo "Missing SANITY_STUDIO_HOST variable"; exit 1; }
