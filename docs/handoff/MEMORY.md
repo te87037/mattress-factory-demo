@@ -2,91 +2,123 @@
 
 > 最後整理：2026-08-04（Asia/Taipei）
 >
-> 本文件保存專案現況與不可遺漏的維運資訊。Token、密碼與私人憑證不得寫入本文件。
+> 本文件保存目前真實架構、網址、部署方式與不可遺漏設定。不得在本文件寫入 Token、密碼或私人憑證。
 
-## 專案識別
+## 1. 現行架構
 
-- GitHub repository：`te87037/mattress-factory-demo`
+- 正式網站：Next.js 靜態匯出
+- 內容後台：Sanity Studio
+- 內容資料：Sanity Content Lake
+- 正式託管：GitHub Pages
+- 自動化：GitHub Actions
 - 正式分支：`main`
-- 官網：`https://te87037.github.io/mattress-factory-demo/`
-- Sanity Studio：`https://te87037.github.io/mattress-factory-demo/studio/`
+- Node.js：22
+
+**Pages CMS／PageCMS 已完全淘汰。**
+
+不要使用：
+
+- `https://app.pagescms.org/`
+- `cms-preview`
+- `sanity-cms`
+- Cloudflare Pages 預覽
+- Pages CMS GitHub App
+- `.pages.yml`
+- CMS 建立 Pull Request 的舊發布流程
+
+## 2. 專案識別
+
+- Repository：`te87037/mattress-factory-demo`
+- Repository URL：<https://github.com/te87037/mattress-factory-demo>
+- 官網：<https://te87037.github.io/mattress-factory-demo/>
+- Studio：<https://te87037.github.io/mattress-factory-demo/studio/>
 - Sanity Project ID：`1n448ksq`
 - Sanity Dataset：`production`
-- 網站技術：Next.js 靜態匯出 + GitHub Pages
-- 內容後台：Sanity Studio，自行託管於 GitHub Pages 的 `/studio/`
-- Node.js：GitHub Actions 使用 Node 22
+- Sanity Manage：<https://www.sanity.io/manage/project/1n448ksq>
 
-## 老闆日常操作
+## 3. 維運網址
 
-老闆平常只需要使用 Sanity Studio：
+- GitHub Actions：<https://github.com/te87037/mattress-factory-demo/actions>
+- Deploy workflow：<https://github.com/te87037/mattress-factory-demo/actions/workflows/deploy-pages.yml>
+- Import workflow：<https://github.com/te87037/mattress-factory-demo/actions/workflows/import-sanity-content.yml>
+- 部署狀態：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/GITHUB_PAGES_STATUS.md>
+- Variables：<https://github.com/te87037/mattress-factory-demo/settings/variables/actions>
+- Secrets：<https://github.com/te87037/mattress-factory-demo/settings/secrets/actions>
+- Pages 設定：<https://github.com/te87037/mattress-factory-demo/settings/pages>
+- 完整 Skill：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/handoff/SKILL.md>
 
-1. 登入後台。
-2. 修改「聯絡與營業資訊」或「床墊產品」。
-3. 上傳或排序產品照片。
-4. 按「發布」。
-5. 等待自動部署。
+## 4. 老闆日常資料流
 
-官網左下角有低透明度齒輪，點擊可進入後台。這個入口只是方便使用，不是權限保護；真正權限由 Sanity 帳號控制。
+1. 老闆開啟 Sanity Studio。
+2. 修改聯絡資訊或產品。
+3. 按「發布」。
+4. GitHub Actions 每 15 分鐘讀取 Sanity。
+5. 建置官網與 Studio。
+6. 發布到 GitHub Pages。
+7. 一般約 5～20 分鐘生效。
 
-## 官網目前支援的後台內容
+官網左下角有低透明度齒輪，可開啟 Studio。此齒輪不是安全措施，真正權限由 Sanity 帳號與角色控制。
+
+## 5. 後台功能
 
 ### 聯絡與營業資訊
 
-包含品牌、電話、地址、營業日、營業時間、午休、假日、試躺、配送、付款與其他官網文字。
+可管理：
+
+- 品牌名稱與品牌縮寫
+- 電話
+- 地址
+- 服務區域
+- 配送範圍
+- 營業日與營業時間
+- 午休與假日說明
+- 試躺說明
+- 訂金與付款方式
+- 訂單修改或取消說明
+- 家族開始製床年份
 
 ### 床墊產品
 
-- 可新增任意數量產品。
-- 可設定排序。
-- 可隱藏或顯示產品。
-- 可填寫名稱、標籤、描述與特色。
-- 每項產品最多使用 8 張照片。
-- 圖片支援 JPG、PNG、WebP。
-- 第一張為封面。
-- 官網支援箭頭、圓點與手機左右滑動。
-- 舊的單張照片欄位仍相容。
+可管理：
 
-## 部署模型
+- 新增任意數量產品
+- 排序
+- 顯示或隱藏
+- 名稱
+- 標籤
+- 描述
+- 特色
+- 最多 8 張照片
 
-主要 workflow：`.github/workflows/deploy-pages.yml`
+圖片規則：
 
-觸發方式：
+- JPG、PNG、WebP
+- 第一張為封面
+- 可拖曳排序
+- 官網支援箭頭、圓點與手機滑動
+- 舊單張照片欄位仍相容
 
-- Push 到 `main`。
-- GitHub Actions 手動執行。
-- `repository_dispatch`：`sanity-content-update`。
-- 每 15 分鐘排程。
+## 6. 部署時間
 
-排程為每小時 `00、15、30、45` 分。
+排程：
 
-一般內容發布後約 5～20 分鐘在官網生效。GitHub Actions concurrency 設為：
+- 每小時 `00` 分
+- 每小時 `15` 分
+- 每小時 `30` 分
+- 每小時 `45` 分
 
-```yaml
-concurrency:
-  group: pages
-  cancel-in-progress: false
-```
+建置通常 3～8 分鐘。Sanity 發布後一般 5～20 分鐘出現在正式官網。
 
-新部署應排隊，不應取消正在執行的舊部署。
+手動立即部署：
 
-## 建置流程
+1. 開啟 Deploy workflow。
+2. 點「Run workflow」。
+3. Branch 選 `main`。
+4. 執行。
+5. 確認 `build`、`deploy`、`record-status` 完成。
+6. 查看 `docs/GITHUB_PAGES_STATUS.md`。
 
-`npm run build` 前會自動執行：
-
-1. `scripts/sync-sanity-content.mjs`
-2. 從 Sanity 讀取已發布內容。
-3. 更新 `content/site.json`。
-4. 更新 `content/products.json`。
-5. 下載 Sanity 產品圖片到 `public/uploads/products/`。
-6. `scripts/apply-content.mjs` 將資料套用到 Next.js 頁面。
-7. Next.js 輸出靜態網站到 `out/`。
-8. `studio/` 獨立建置。
-9. `studio/dist/` 複製到 `out/studio/`。
-10. 整個 `out/` 發布到 GitHub Pages。
-
-Sanity 資料不完整或暫時無法取得時，會使用 repository 內既有內容作為 fallback，不會把網站變成空白。
-
-## GitHub Actions 設定
+## 7. GitHub Actions 設定
 
 ### Variables
 
@@ -99,137 +131,183 @@ Sanity 資料不完整或暫時無法取得時，會使用 repository 內既有�
 
 - `SANITY_TOKEN`
 
-`SANITY_TOKEN` 只供手動重新匯入初始內容使用。官網讀取公開 Dataset 不需要 Token，Studio 由登入者自己的 Sanity Session 寫入。
+用途：手動重新匯入初始內容。
 
-不要建立或依賴：
+不使用：
 
 - `SANITY_WRITE_TOKEN`
 - `SANITY_AUTH_TOKEN`
 - `SANITY_API_READ_TOKEN`
+- `SANITY_STUDIO_HOST`
 
-舊的 `SANITY_STUDIO_HOST` 不再使用，可以刪除。
+官網讀取 public Dataset 不需要 Token。Studio 使用登入者自己的 Sanity Session。
 
-## Sanity 設定
+## 8. Sanity 設定
 
-自架 Studio 必須保留 CORS：
+### CORS
+
+必須保留：
 
 - Origin：`https://te87037.github.io`
 - Allow credentials：開啟
 
-Origin 不包含 `/mattress-factory-demo/studio/`。
+不要填：
 
-## 手動部署
+`https://te87037.github.io/mattress-factory-demo/studio/`
 
-GitHub：
+只填：
 
-`Actions → Deploy website and Studio to GitHub Pages → Run workflow → main`
+`https://te87037.github.io`
 
-部署完成後查看：
+### Studio 託管
 
-`docs/GITHUB_PAGES_STATUS.md`
+- 不使用 `sanity deploy`
+- 不使用 `*.sanity.studio`
+- Studio 與官網一起部署
+- Studio build 複製到 `out/studio/`
 
-應顯示：
+## 9. 自動建置流程
 
-- 官網與 Studio 建置：`success`
-- GitHub Pages 發布：`success`
-- 本次部署電話：應與 Sanity 已發布電話一致
-- Workflow Run ID：最新執行編號
+`.github/workflows/deploy-pages.yml` 會：
 
-## 手動重新匯入 Sanity
+1. Checkout `main`。
+2. 安裝 Node.js 22。
+3. 安裝網站依賴。
+4. 執行 `npm run build`。
+5. `prebuild` 呼叫 `prepare-content`。
+6. 從 Sanity 讀取已發布資料。
+7. 更新 `content/site.json`。
+8. 更新 `content/products.json`。
+9. 下載產品照片到 `public/uploads/products/`。
+10. 執行 `scripts/apply-content.mjs`。
+11. Next.js 建立 `out/index.html`。
+12. 安裝 Studio 依賴。
+13. 建立 Studio。
+14. 複製 `studio/dist/` 到 `out/studio/`。
+15. 驗證 `out/studio/index.html`。
+16. 上傳 Pages artifact。
+17. 發布 GitHub Pages。
+18. 寫入 `docs/GITHUB_PAGES_STATUS.md`。
+
+Sanity 暫時連線失敗或資料不完整時，使用 repository fallback，不會把網站清空。
+
+## 10. 部署 concurrency
+
+必須維持：
+
+```yaml
+concurrency:
+  group: pages
+  cancel-in-progress: false
+```
+
+歷史上曾因 `true` 導致排程與手動部署互相取消。目前必須排隊執行。
+
+## 11. 手動匯入功能
 
 Workflow：`.github/workflows/import-sanity-content.yml`
 
-用途只限：
+腳本：`scripts/import-to-sanity.mjs`
 
-- Sanity Dataset 被清空。
-- 建立新 Dataset。
-- 確認 repository 內容要覆蓋 Sanity。
+行為：
 
-此 workflow 使用 `SANITY_TOKEN`，呼叫 `scripts/import-to-sanity.mjs`。
+- 讀取 repository fallback JSON
+- 對 Sanity 執行 `createOrReplace`
+- 可能覆蓋相同 ID 的現有資料
+- 不會上傳產品照片到 Sanity
 
-警告：
+只在 Dataset 被清空、新建 Dataset 或已確認 repository 內容正確時使用。不可當成日常發布功能。
 
-- 會 `createOrReplace` 固定 ID 的 site settings 與 repository 產品。
-- 可能覆蓋 Sanity 現有內容。
-- 不會把 repository 的產品圖片上傳回 Sanity。
-- 不可當作日常發布功能。
+## 12. 重要檔案
 
-## 重要檔案
+- `README.md`：專案入口與操作摘要
+- `CMS_SETUP.md`：Sanity CMS 操作入口，檔名沿用但內容不再是 Pages CMS
+- `docs/SANITY_SETUP.md`：Sanity 設定與操作
+- `docs/SANITY_SETUP_RESULT.md`：目前啟用狀態
+- `docs/GITHUB_PAGES_STATUS.md`：最新部署狀態，由 workflow 自動更新
+- `docs/handoff/SKILL.md`：完整交接操作
+- `docs/handoff/MEMORY.md`：本文件
+- `.github/workflows/deploy-pages.yml`：正式部署
+- `.github/workflows/import-sanity-content.yml`：高風險手動匯入
+- `.github/workflows/validate-preview.yml`：官網 PR 建置驗證；名稱雖保留 preview，但不再屬於 Pages CMS
+- `.github/workflows/validate-sanity-studio.yml`：Studio PR 建置驗證
+- `scripts/sync-sanity-content.mjs`：Sanity → repository build data
+- `scripts/import-to-sanity.mjs`：repository → Sanity
+- `scripts/apply-content.mjs`：JSON → Next.js 頁面
+- `content/site.json`：聯絡資訊 fallback
+- `content/products.json`：產品 fallback
+- `studio/`：Sanity Studio
 
-- `.github/workflows/deploy-pages.yml`：官網與 Studio 發布。
-- `.github/workflows/import-sanity-content.yml`：危險的手動初始資料匯入。
-- `scripts/sync-sanity-content.mjs`：Sanity → repository 建置內容。
-- `scripts/import-to-sanity.mjs`：repository → Sanity 初始內容。
-- `scripts/apply-content.mjs`：將 JSON 內容套用至網站。
-- `content/site.json`：網站聯絡與企業資訊 fallback。
-- `content/products.json`：產品 fallback。
-- `studio/sanity.config.ts`：Studio 設定與導覽結構。
-- `studio/sanity.cli.ts`：Studio Project、Dataset 與 GitHub Pages base path。
-- `studio/schemaTypes/`：Sanity Schema。
-- `docs/GITHUB_PAGES_STATUS.md`：最新部署結果。
-- `docs/SANITY_SETUP.md`：Sanity 基礎設定說明。
-- `docs/handoff/SKILL.md`：完整操作與故障排查手冊。
+## 13. 已處理的重要事故
 
-## 已修正過的重要問題
+### Pages CMS 淘汰
 
-### Sanity 導覽結構 ID
+舊 Pages CMS 設定與 workflow 已從 `main` 移除，但歷史分支可能仍存在。任何維運不得回到 Pages CMS。
 
-根清單、單例文件與產品清單使用固定 ID，避免 Studio 載入時出現：
+### Sanity-hosted Studio 失敗
+
+曾嘗試部署到 `kaili-mattress-admin.sanity.studio`，因權限不足失敗。現在改成 GitHub Pages 自架 Studio，舊網址無效。
+
+### Studio list ID 錯誤
+
+根清單、單例文件與產品清單使用固定 ID，避免：
 
 ```text
 `id` is required for lists
 ```
 
-### DividerBuilder
+### DividerBuilder 錯誤
 
-`S.divider()` 不支援 `.id()`。禁止改成：
+禁止：
 
 ```ts
-S.divider().id("...")
+S.divider().id("content-divider")
 ```
 
-正確寫法：
+正確：
 
 ```ts
 S.divider()
 ```
 
-### GitHub Pages 部署互相取消
+### 部署互相取消
 
-曾因 `cancel-in-progress: true` 導致排程與手動部署互相取消，目前已改為 `false`。
+`cancel-in-progress` 已改為 `false`。
 
-### Sanity-hosted Studio 權限不足
-
-目前不使用 `sanity deploy`，Studio 與官網一起建置後發布到 GitHub Pages，因此不需要 Deploy Studio Token。
-
-## 安全與權限
+## 14. 安全原則
 
 - 不在 repository 保存 Token 值。
-- 不在聊天、Issue、Email 或截圖中傳 Token。
-- 老闆應使用自己的 GitHub 與 Sanity 帳號。
+- 不在聊天、Issue、Email 或截圖傳 Token。
+- 老闆使用自己的 GitHub 與 Sanity 帳號。
 - 不共用原開發者密碼。
-- 老闆需有 Sanity 編輯權限。
-- 需要管理 Secrets、Variables、Pages 或成員時，老闆需有 GitHub repository Admin 權限。
-- 隱藏後台齒輪不構成安全控制。
+- 後台入口隱密不等於安全。
+- 不刪除 `production` Dataset。
+- 不刪除正確 CORS Origin。
+- 不直接編輯 `out/`。
+- 程式修改先分支、PR、CI，再合併 `main`。
 
-## 移交完成條件
+## 15. 未來處理問題的順序
+
+1. 確認 Sanity 是否真的按「發布」。
+2. 查看 `docs/GITHUB_PAGES_STATUS.md`。
+3. 查看最新 GitHub Actions。
+4. 判斷是 Sanity 資料、建置、部署或瀏覽器快取。
+5. 必要時手動部署。
+6. 只有明確出現 `401` 或 `403` 才處理 Token。
+7. 不要因內容沒更新就回頭使用 PageCMS。
+
+## 16. 移交完成條件
 
 - 老闆能登入 Studio。
 - 老闆能修改電話並發布。
-- 老闆能新增、排序、隱藏產品。
-- 老闆能上傳多張產品照片。
-- 老闆知道發布後需等待自動部署。
-- 老闆知道如何手動執行部署。
-- 老闆能查看部署狀態檔。
-- GitHub Variables 與 `SANITY_TOKEN` 已由老闆帳號管理。
-- Sanity CORS 與專案成員已完成交接。
-
-## 回應未來維運問題時的原則
-
-1. 先判斷是「Sanity 未發布」、「部署未執行」、「部署失敗」或「瀏覽器快取」。
-2. 先查看 `docs/GITHUB_PAGES_STATUS.md`，不要猜測部署結果。
-3. 需要查 CI 時，查看最新 GitHub Actions 的第一個失敗步驟。
-4. 不因網站沒更新就直接重設 Token。
-5. 所有程式修改先使用分支與 PR，建置通過後再合併。
-6. 不直接編輯 `out/`，因為每次部署都會重建。
-7. 不刪除 `production` Dataset、CORS Origin 或 GitHub Pages workflow。
+- 老闆能新增產品。
+- 老闆能上傳與排序多張照片。
+- 老闆知道發布後約 5～20 分鐘生效。
+- 老闆知道如何手動部署。
+- 老闆能查看最新部署狀態。
+- 老闆知道 PageCMS 已完全停用。
+- 老闆不使用 `cms-preview` 或 `sanity-cms`。
+- GitHub Variables 正確。
+- Secret 只使用 `SANITY_TOKEN`。
+- Sanity CORS 正確。
+- GitHub Pages 使用 GitHub Actions。
