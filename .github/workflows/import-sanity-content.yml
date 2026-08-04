@@ -12,7 +12,7 @@ jobs:
     env:
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET }}
-      SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
+      SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
       - name: Verify configuration
         run: |
           test -n "$SANITY_PROJECT_ID" || { echo "Missing SANITY_PROJECT_ID variable"; exit 1; }
-          test -n "$SANITY_WRITE_TOKEN" || { echo "Missing SANITY_WRITE_TOKEN secret"; exit 1; }
+          test -n "$SANITY_TOKEN" || { echo "Missing SANITY_TOKEN secret"; exit 1; }
 
       - name: Import website content
         run: node scripts/import-to-sanity.mjs
