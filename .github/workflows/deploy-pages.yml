@@ -26,7 +26,6 @@ jobs:
     env:
       SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_DATASET: ${{ vars.SANITY_DATASET }}
-      SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
       SANITY_STUDIO_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
       SANITY_STUDIO_DATASET: ${{ vars.SANITY_DATASET }}
       SANITY_STUDIO_BASEPATH: /mattress-factory-demo/studio
