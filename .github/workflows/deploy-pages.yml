@@ -112,7 +112,7 @@ jobs:
           cat > docs/GITHUB_PAGES_STATUS.md <<EOF
           # GitHub Pages 部署狀態
 
-          官網與 Studio 建置：${BUILD_STATUS}
+          官網與 Sanity Studio 建置：${BUILD_STATUS}
 
           GitHub Pages 發布：${DEPLOY_STATUS}
 
@@ -122,7 +122,13 @@ jobs:
 
           官網：https://te87037.github.io/mattress-factory-demo/
 
-          後台：https://te87037.github.io/mattress-factory-demo/studio/
+          內容後台（Sanity Studio）：https://te87037.github.io/mattress-factory-demo/studio/
+
+          手動部署：https://github.com/te87037/mattress-factory-demo/actions/workflows/deploy-pages.yml
+
+          老闆交接手冊：https://github.com/te87037/mattress-factory-demo/blob/main/docs/handoff/SKILL.md
+
+          PageCMS／Pages CMS：已停用，不再使用 app.pagescms.org、cms-preview 或 sanity-cms。
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
