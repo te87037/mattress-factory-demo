@@ -1,236 +1,364 @@
 ---
 name: mattress-factory-owner-handoff
-description: 維護、發布與排查凱麗企業社床墊工廠官網及 Sanity 後台。適用於老闆日常更新、GitHub Pages 部署、Sanity 設定、產品新增、照片管理與故障排查。
+description: 維護、發布與排查凱麗企業社床墊工廠官網、Sanity Studio 與 GitHub Pages。適用於老闆日常更新、產品新增、多圖管理、手動部署、Sanity 設定、帳號移交與故障排查。
 ---
 
 # 凱麗企業社官網維運 Skill
 
-## 1. 使用範圍
+## 0. 先讀這段
 
-這份文件交給老闆、網站接手人員或協助維運的 AI 使用。
+本網站目前的唯一內容後台是 **Sanity Studio**。
 
-日常內容更新不需要修改程式碼，也不需要進入 GitHub。只有網站沒有更新、需要重新部署、修改版面或更換技術設定時，才需要操作 GitHub。
+**Pages CMS／PageCMS 已完全淘汰。** 不要再使用：
 
-## 2. 重要網址
+- `https://app.pagescms.org/`
+- `cms-preview` 分支
+- `sanity-cms` 分支
+- Pages CMS GitHub App
+- `.pages.yml`
+- `cms-submit-review.yml`
+- Cloudflare Pages 預覽
+- 從 CMS 建立 Pull Request 的發布方式
 
-- 官網：`https://te87037.github.io/mattress-factory-demo/`
-- 內容後台：`https://te87037.github.io/mattress-factory-demo/studio/`
-- GitHub 專案：`https://github.com/te87037/mattress-factory-demo`
-- 部署狀態：GitHub 專案內的 `docs/GITHUB_PAGES_STATUS.md`
+目前正確資料流只有：
 
-官網左下角有一個低透明度齒輪，可直接開啟後台。
+`Sanity Studio 按發布 → GitHub Actions 建置 → GitHub Pages 正式官網`
 
-## 3. 老闆日常更新流程
+## 1. 所有重要網址
 
-### 3.1 修改電話、地址、營業時間或其他資訊
+### 老闆每天會用到
 
-1. 開啟內容後台。
-2. 使用 Sanity 帳號登入。
-3. 進入「聯絡與營業資訊」。
-4. 修改需要調整的欄位。
-5. 按右上角「發布」。
-6. 等待下一次官網部署。
+- 正式官網：<https://te87037.github.io/mattress-factory-demo/>
+- 內容後台：<https://te87037.github.io/mattress-factory-demo/studio/>
 
-只按「儲存草稿」不會出現在官網，必須按「發布」。
+官網左下角有低透明度齒輪，點擊會開啟內容後台。
 
-### 3.2 新增產品
+### GitHub 維運網址
 
-1. 開啟內容後台。
-2. 進入「床墊產品」。
-3. 按「＋」新增文件。
-4. 填寫產品名稱、排序、標籤、描述與特色。
-5. 上傳產品照片。
-6. 確認「顯示於官網」已開啟。
-7. 按「發布」。
+- Repository：<https://github.com/te87037/mattress-factory-demo>
+- Actions 總覽：<https://github.com/te87037/mattress-factory-demo/actions>
+- 官網與 Studio 部署：<https://github.com/te87037/mattress-factory-demo/actions/workflows/deploy-pages.yml>
+- 手動重新匯入 Sanity：<https://github.com/te87037/mattress-factory-demo/actions/workflows/import-sanity-content.yml>
+- 最新部署狀態：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/GITHUB_PAGES_STATUS.md>
+- Pages 設定：<https://github.com/te87037/mattress-factory-demo/settings/pages>
+- Actions Variables：<https://github.com/te87037/mattress-factory-demo/settings/variables/actions>
+- Actions Secrets：<https://github.com/te87037/mattress-factory-demo/settings/secrets/actions>
 
-產品不需要手動填寫系統 ID。官網會依「排序」欄位顯示，數字越小越前面。
+### Sanity 維運網址
 
-### 3.3 管理產品照片
+- Sanity Project：<https://www.sanity.io/manage/project/1n448ksq>
+- Project ID：`1n448ksq`
+- Dataset：`production`
 
-- 每項產品最多使用 8 張照片。
+## 2. 老闆日常修改聯絡資訊
+
+1. 用手機或電腦開啟 <https://te87037.github.io/mattress-factory-demo/studio/>。
+2. 使用已加入 Sanity 專案的帳號登入。
+3. 點左側「聯絡與營業資訊」。
+4. 修改電話、地址、營業時間、休息時間、試躺或付款說明。
+5. 檢查欄位內容。
+6. 點右上角「發布」。
+7. 等待自動部署。
+
+重要：
+
+- 只修改或儲存草稿不會更新正式官網。
+- 一定要按「發布」。
+- 不需要進 GitHub。
+- 不需要更換 Token。
+
+## 3. 老闆新增產品
+
+1. 開啟 Sanity Studio。
+2. 點左側「床墊產品」。
+3. 點右上角「＋」。
+4. 填寫產品名稱。
+5. 填寫「排序」：數字越小，官網越前面。
+6. 填寫產品標籤。
+7. 填寫產品描述。
+8. 新增產品特色。
+9. 上傳產品照片。
+10. 確認「顯示於官網」已開啟。
+11. 點「發布」。
+
+產品不需要手動輸入系統 ID。Sanity 會自動建立文件 ID，官網會在下一次部署時自動加入產品。
+
+## 4. 產品照片操作
+
+規則：
+
+- 每項產品最多 8 張。
 - 支援 JPG、PNG、WebP。
-- 第一張照片會作為封面。
-- 可在後台拖曳調整照片順序。
-- 官網支援左右箭頭、圓點及手機左右滑動。
-- 建議單張圖片控制在 2 MB 以內，避免部署時間過長。
-- 不建議使用 HEIC；請先轉成 JPG 或 WebP。
+- 第一張為封面。
+- 可以拖曳調整順序。
+- 官網桌面版有左右箭頭與圓點。
+- 官網手機版可以左右滑動。
+- 建議單張照片小於 2 MB。
+- HEIC 請先轉成 JPG 或 WebP。
 
-### 3.4 暫時隱藏產品
+建議照片順序：
 
-1. 打開該產品。
+1. 產品完整正面。
+2. 側面厚度。
+3. 表布與車縫細節。
+4. 內材或結構。
+5. 實際擺放情境。
+6. 尺寸或客製說明。
+
+## 5. 隱藏、恢復與刪除產品
+
+### 暫時下架
+
+1. 打開產品。
 2. 關閉「顯示於官網」。
 3. 按「發布」。
 
-不要為了暫時下架而刪除產品，關閉顯示即可保留資料與照片。
+### 重新上架
 
-## 4. 內容何時會出現在官網
+1. 打開產品。
+2. 開啟「顯示於官網」。
+3. 按「發布」。
 
-內容發布後，GitHub Pages 每 15 分鐘自動重新建置一次。
+### 刪除產品
 
-部署時間通常還需要約 3～8 分鐘，因此一般會在發布後 5～20 分鐘生效。排程時間為每小時的：
+只有確定永遠不需要該內容與照片時才刪除。暫時下架請使用「顯示於官網」，不要刪除。
+
+## 6. 發布後多久會生效
+
+GitHub Pages 每 15 分鐘執行一次部署：
 
 - `00` 分
 - `15` 分
 - `30` 分
 - `45` 分
 
-部署採排隊執行，不會再因新任務啟動而取消正在執行的任務。
+建置與發布通常另需 3～8 分鐘，所以一般約 5～20 分鐘生效。
 
-看到舊內容時，先以重新整理或無痕視窗確認。必要時可在網址後加入任意版本參數，例如：
+範例：
 
-`https://te87037.github.io/mattress-factory-demo/?v=20260804`
+- 10:02 發布：通常 10:15 開始建置，約 10:18～10:23 生效。
+- 10:14 發布：可能趕上 10:15，約 10:18～10:23 生效。
+- 10:16 發布：通常等 10:30，約 10:33～10:38 生效。
 
-## 5. 手動立即部署
+## 7. 手動立即部署
 
-內容很急、不想等 15 分鐘排程時：
+內容很急時，不必等下一個 15 分鐘排程。
 
 1. 登入 GitHub。
-2. 開啟 `te87037/mattress-factory-demo`。
-3. 點上方「Actions」。
-4. 左側選擇「Deploy website and Studio to GitHub Pages」。
-5. 點右側「Run workflow」。
-6. Branch 選擇 `main`。
-7. 再按一次綠色「Run workflow」。
-8. 等待 `build`、`deploy` 與 `record-status` 完成。
+2. 開啟 <https://github.com/te87037/mattress-factory-demo/actions/workflows/deploy-pages.yml>。
+3. 在頁面右側找到「Run workflow」。
+4. 點「Run workflow」。
+5. Branch 選 `main`。
+6. 再點綠色「Run workflow」。
+7. 等待新的一筆 workflow run 出現。
+8. 點進該 run。
+9. 確認 `build` 完成。
+10. 確認 `deploy` 完成。
+11. 確認 `record-status` 完成。
+12. 開啟 <https://github.com/te87037/mattress-factory-demo/blob/main/docs/GITHUB_PAGES_STATUS.md>。
+13. 確認「官網與 Studio 建置」為 `success`。
+14. 確認「GitHub Pages 發布」為 `success`。
+15. 確認「本次部署電話」與 Sanity 已發布電話一致。
 
-部署完成後，確認：
+## 8. 瀏覽器仍顯示舊內容
 
-- `build` 為綠色成功。
-- `deploy` 為綠色成功。
-- `docs/GITHUB_PAGES_STATUS.md` 顯示：
-  - 官網與 Studio 建置：`success`
-  - GitHub Pages 發布：`success`
-  - Workflow Run ID 為最新執行編號。
+依序處理：
 
-狀態檔會記錄本次同步到官網的電話，可用來確認 Sanity 新資料是否真的被抓到。
+1. 確認 Sanity 已按「發布」。
+2. 確認最新部署成功。
+3. 在瀏覽器重新整理。
+4. 關閉頁面後重新開啟。
+5. 使用無痕視窗。
+6. 在網址後加入版本參數。
 
-## 6. 自動部署的技術流程
+版本參數範例：
 
-主要工作流程：`.github/workflows/deploy-pages.yml`
+`https://te87037.github.io/mattress-factory-demo/?v=20260804-1`
 
-觸發條件：
+版本參數只用來避開瀏覽器快取，不會修改網站內容。
 
-- `main` 分支有新提交。
-- GitHub Actions 手動執行。
-- 收到 `repository_dispatch` 的 `sanity-content-update` 事件。
-- 每 15 分鐘排程執行。
+## 9. GitHub 必要設定
 
-建置順序：
+### Variables
 
-1. Checkout `main`。
-2. 安裝 Node.js 22。
-3. 安裝官網依賴。
-4. 執行 `npm run build`。
-5. `prebuild` 先執行：
-   - 從 Sanity 讀取已發布內容。
-   - 將資料同步到 `content/site.json` 與 `content/products.json`。
-   - 下載 Sanity 產品照片到 `public/uploads/products/`。
-   - 將內容套用到 Next.js 頁面。
-6. 安裝 `studio/` 依賴。
-7. 建置 Sanity Studio。
-8. 將 `studio/dist/` 複製到 `out/studio/`。
-9. 確認 `out/index.html` 與 `out/studio/index.html` 存在。
-10. 上傳 GitHub Pages artifact。
-11. 發布到 GitHub Pages。
-12. 更新 `docs/GITHUB_PAGES_STATUS.md`。
+開啟：<https://github.com/te87037/mattress-factory-demo/settings/variables/actions>
 
-Sanity 暫時連線失敗或內容不完整時，程式會保留 repository 內既有內容，不會把網站清空。
-
-## 7. 必要的 GitHub 設定
-
-### Repository Variables
-
-位置：`Settings → Secrets and variables → Actions → Variables`
+必須存在：
 
 - `SANITY_PROJECT_ID`：`1n448ksq`
 - `SANITY_DATASET`：`production`
 
-### Repository Secret
+### Secret
 
-位置：`Settings → Secrets and variables → Actions → Secrets`
+開啟：<https://github.com/te87037/mattress-factory-demo/settings/secrets/actions>
 
 只需要：
 
 - `SANITY_TOKEN`
 
-用途：只供「重新匯入 repository 既有內容到 Sanity」使用。
+用途：手動將 repository 初始內容匯入 Sanity。
 
-安全規則：
+不要建立或依賴：
 
-- 不可把 Token 放入程式碼、文件、聊天、Issue、截圖或 Email。
-- 不要把 Token 交給不需要重新匯入權限的人。
-- Token 外洩時，立即在 Sanity 撤銷並建立新 Token，再更新 GitHub Secret。
-- 官網日常讀取公開資料不需要 Token。
-- Studio 編輯使用登入者自己的 Sanity 帳號，不使用 GitHub Secret。
+- `SANITY_WRITE_TOKEN`
+- `SANITY_AUTH_TOKEN`
+- `SANITY_API_READ_TOKEN`
+- `SANITY_STUDIO_HOST`
 
-## 8. 必要的 Sanity 設定
+### GitHub Pages
+
+開啟：<https://github.com/te87037/mattress-factory-demo/settings/pages>
+
+確認 Build and deployment 的 Source 使用 GitHub Actions。
+
+## 10. Sanity 必要設定
+
+### Project
 
 - Project ID：`1n448ksq`
 - Dataset：`production`
-- Studio 由 GitHub Pages 自行託管，不使用 `*.sanity.studio`。
+- Studio：GitHub Pages 自架版本
+- Studio URL：<https://te87037.github.io/mattress-factory-demo/studio/>
 
-### CORS Origin
+### CORS
 
-Sanity Manage 的 `Settings → API settings → CORS Origins` 必須保留：
+開啟 <https://www.sanity.io/manage/project/1n448ksq>，進入：
+
+`Settings → API settings → CORS Origins`
+
+必須有：
 
 - Origin：`https://te87037.github.io`
 - Allow credentials：開啟
 
-不要填入 `/mattress-factory-demo/studio/`，CORS Origin 只填網域。
+錯誤：
+
+`https://te87037.github.io/mattress-factory-demo/studio/`
+
+正確：
+
+`https://te87037.github.io`
 
 ### 帳號交接
 
-應邀請老闆本人的 Sanity 帳號加入專案，不要共用原開發者密碼。
+老闆必須使用自己的 Sanity 帳號加入專案。不要把原開發者的帳號密碼交給老闆，也不要多人共用同一組密碼。
 
-交接完成前確認老闆能：
+交接測試：
 
-- 登入 Studio。
-- 修改聯絡資訊。
-- 新增產品。
-- 上傳照片。
-- 發布內容。
+1. 老闆登入 Studio。
+2. 修改一個測試欄位。
+3. 按發布。
+4. 新增一個測試產品。
+5. 上傳照片。
+6. 按發布。
+7. 確認官網更新。
+8. 刪除或隱藏測試產品。
 
-## 9. 重新匯入 repository 內容到 Sanity
+## 11. 自動部署技術流程
 
-工作流程：`.github/workflows/import-sanity-content.yml`
+主要 workflow：`.github/workflows/deploy-pages.yml`
 
-這不是日常部署工具。它會把 repository 內的 `content/site.json` 與 `content/products.json` 寫回 Sanity，可能覆蓋同 ID 的現有內容。
+觸發方式：
 
-只有下列情況才使用：
+- Push 到 `main`。
+- GitHub Actions 手動執行。
+- `repository_dispatch` 的 `sanity-content-update`。
+- 每 15 分鐘排程。
 
-- Sanity 資料被清空。
-- 新建 Dataset 後需要建立初始資料。
-- 已確認 repository 內容才是正確版本。
+執行順序：
 
-操作方式：
+1. Checkout `main`。
+2. 安裝 Node.js 22。
+3. 安裝官網依賴。
+4. 執行 `npm run build`。
+5. `prebuild` 執行 `npm run prepare-content`。
+6. `scripts/sync-sanity-content.mjs` 從 Sanity 讀取已發布資料。
+7. 更新 `content/site.json`。
+8. 更新 `content/products.json`。
+9. 下載產品照片到 `public/uploads/products/`。
+10. `scripts/apply-content.mjs` 套用內容。
+11. Next.js 產生 `out/index.html`。
+12. 安裝 `studio/` 依賴。
+13. 建置 Sanity Studio。
+14. 複製 `studio/dist/` 到 `out/studio/`。
+15. 確認 `out/studio/index.html` 存在。
+16. 上傳 GitHub Pages artifact。
+17. 發布 GitHub Pages。
+18. 更新 `docs/GITHUB_PAGES_STATUS.md`。
 
-1. 先確認 GitHub Secret `SANITY_TOKEN` 有效。
-2. 開啟 GitHub `Actions`。
-3. 選擇「Import Existing Content to Sanity」。
-4. 點「Run workflow」，Branch 選 `main`。
-5. 等待執行成功。
-6. 回到 Studio 檢查資料。
-7. 再手動執行一次正式部署。
+Sanity 暫時無法連線或資料不完整時，網站會保留 repository 內既有 fallback 內容，不會被清空。
 
-注意：匯入腳本不會把 repository 的產品照片重新上傳到 Sanity。照片仍應在 Studio 內上傳。
+## 12. 部署排隊設定
 
-## 10. 本機開發與測試
+部署 workflow 必須維持：
 
-技術人員需要修改版面時：
+```yaml
+concurrency:
+  group: pages
+  cancel-in-progress: false
+```
+
+原因：手動部署可能與每 15 分鐘排程同時發生。`false` 會排隊，避免新任務取消舊任務。
+
+若發現部署一直是 `cancelled`：
+
+1. 打開 `.github/workflows/deploy-pages.yml`。
+2. 確認 `cancel-in-progress` 沒被改回 `true`。
+3. 確認不是使用者手動取消。
+4. 等待目前 Pages 任務完成。
+5. 再手動執行一次部署。
+
+## 13. 手動重新匯入 Sanity
+
+Workflow：<https://github.com/te87037/mattress-factory-demo/actions/workflows/import-sanity-content.yml>
+
+這是一個高風險救援功能，不是日常發布功能。
+
+它會：
+
+- 讀取 `content/site.json`。
+- 讀取 `content/products.json`。
+- 使用 `createOrReplace` 寫回 Sanity。
+- 覆蓋相同 ID 的 site settings 與產品。
+
+只有下列情況才執行：
+
+- Dataset 被清空。
+- 建立新 Dataset。
+- 已確認 repository 內容比 Sanity 正確。
+
+操作：
+
+1. 先備份或確認 Sanity 現有內容。
+2. 確認 `SANITY_TOKEN` 有效。
+3. 開啟匯入 workflow。
+4. 點「Run workflow」。
+5. Branch 選 `main`。
+6. 執行。
+7. 回到 Studio 檢查資料。
+8. 再執行正式部署。
+
+此匯入不會把 repository 產品照片上傳回 Sanity，照片仍需在 Studio 上傳。
+
+## 14. 本機開發
+
+官網：
 
 ```bash
 npm install
 npm run dev
 ```
 
-正式建置檢查：
+網址：<http://localhost:3000>
+
+正式檢查：
 
 ```bash
 npm run typecheck
 npm run build
 ```
 
-Studio 本機執行：
+Sanity Studio：
 
 ```bash
 cd studio
@@ -238,92 +366,96 @@ npm install
 npm run dev
 ```
 
-程式修改請使用分支與 Pull Request，不直接在 `main` 試錯。合併前至少確認：
+程式修改規則：
 
-- TypeScript 檢查成功。
-- Next.js 靜態建置成功。
-- `out/index.html` 存在。
-- Studio 建置成功。
-- `out/studio/index.html` 存在。
+1. 從 `main` 建立新分支。
+2. 在分支修改。
+3. 建立 Pull Request。
+4. 等待 Validate website。
+5. 需要時等待 Validate Sanity Studio。
+6. 全部成功後才合併。
+7. 不直接在 `main` 試錯。
+8. 不直接編輯 `out/`。
 
-## 11. 常見故障排查
+## 15. 常見故障
 
-### 11.1 後台已發布，但官網仍是舊資料
+### Sanity 已發布，官網沒有更新
 
-依序確認：
+1. 確認不是草稿。
+2. 確認已等待 5～20 分鐘。
+3. 查看最新部署狀態。
+4. 手動部署一次。
+5. 使用無痕視窗。
 
-1. Sanity 頁面右上角是否已按「發布」，不是只有草稿。
-2. 是否已等待下一個 15 分鐘排程及建置時間。
-3. 開啟 GitHub Actions，確認最新部署是否成功。
-4. 查看 `docs/GITHUB_PAGES_STATUS.md` 的 Workflow Run ID 與電話。
-5. 手動執行一次部署。
-6. 使用無痕視窗或加入 `?v=任意值` 測試。
+不要先重設 Token。只有 workflow 明確出現 `401`、`403` 或授權錯誤時才處理 Token。
 
-不要一開始就更換 Token。只有日誌明確顯示 `401`、`403` 或授權錯誤時，才處理 Token 或帳號權限。
-
-### 11.2 部署顯示 failed
-
-打開失敗的 workflow，查看第一個紅色步驟：
-
-- `Build website`：通常是 Sanity 資料格式、圖片格式或程式錯誤。
-- `Build Studio`：通常是 Studio Schema 或結構程式錯誤。
-- `Deploy to GitHub Pages`：通常是 Pages 權限、環境或 GitHub 平台問題。
-- `Record status`：通常是同時有提交導致 push 衝突；重新執行 workflow 即可。
-
-### 11.3 部署顯示 cancelled
-
-目前設定為 `cancel-in-progress: false`，正常情況應排隊而不是互相取消。
-
-若再次出現 cancelled：
-
-1. 確認 `deploy-pages.yml` 的 concurrency 沒被改回 `true`。
-2. 查看是否由使用者手動取消。
-3. 等待其他 Pages 任務完成後重新執行。
-
-### 11.4 Studio 無法登入或出現 CORS 錯誤
+### Studio 無法登入或出現 CORS
 
 確認：
 
-- 使用正確的 Sanity 專案成員帳號。
-- CORS Origin 為 `https://te87037.github.io`。
+- 網址為 <https://te87037.github.io/mattress-factory-demo/studio/>。
+- 帳號已加入 Project `1n448ksq`。
+- CORS Origin 是 `https://te87037.github.io`。
 - Allow credentials 已開啟。
-- 網址是 `/mattress-factory-demo/studio/`。
 
-### 11.5 圖片造成建置失敗
+### 圖片建置失敗
 
-- 改用 JPG、PNG 或 WebP。
-- 壓縮過大的照片。
+- 改成 JPG、PNG 或 WebP。
+- 壓縮圖片。
 - 移除損壞圖片後重新上傳。
-- 每項產品最多保留 8 張。
+- 每項產品最多 8 張。
 
-### 11.6 Studio 首頁出現結構錯誤
+### Studio 結構錯誤
 
-不要任意替 `S.divider()` 加 `.id()`；Sanity 的 DividerBuilder 不支援 `.id()`。
+根清單、文件與產品清單可以指定固定 ID。
 
-自訂清單、文件或產品清單可以使用固定 ID，但分隔線保持 `S.divider()`。
+不要使用：
 
-## 12. 網站完整移交清單
+```ts
+S.divider().id("content-divider")
+```
 
-交接人與老闆逐項確認：
+`S.divider()` 不支援 `.id()`。正確寫法：
 
-- [ ] 老闆已加入 GitHub repository，至少可查看 Actions；需要管理設定時應有 Admin 權限。
-- [ ] 老闆已加入 Sanity Project，能登入 Studio。
-- [ ] 老闆已收藏官網與後台網址。
-- [ ] 老闆已實際修改一個測試欄位並發布。
-- [ ] 老闆已新增一個測試產品並上傳照片。
-- [ ] 老闆知道發布後通常需等待 5～20 分鐘。
-- [ ] 老闆知道如何手動執行 GitHub Pages 部署。
-- [ ] GitHub Variables 已確認。
-- [ ] GitHub Secret `SANITY_TOKEN` 已確認存在，但沒有把值寫入文件。
-- [ ] Sanity CORS 設定已確認。
-- [ ] `docs/GITHUB_PAGES_STATUS.md` 顯示最新部署成功。
-- [ ] 原開發者私人帳號、密碼與 Token 沒有直接交付或寫入 repository。
+```ts
+S.divider()
+```
 
-## 13. 變更原則
+## 16. PageCMS 舊分支
 
-- 內容修改：在 Sanity Studio 完成。
-- 版面與功能修改：在 GitHub 分支完成，經過建置檢查後合併到 `main`。
-- 不直接修改 GitHub Pages 產物；部署會重新產生 `out/`。
-- 不刪除 `production` Dataset，除非已完整備份並確認重建方案。
-- 不刪除 CORS Origin，否則自架 Studio 將無法正常登入與寫入。
-- 不把後台入口當作安全措施；真正權限由 Sanity 登入與角色控制。
+Repository 目前可能仍看得到：
+
+- `cms-preview`
+- `sanity-cms`
+
+這些是歷史分支，不是正式內容來源。老闆與接手人員不可選擇這些分支操作或部署。正式內容與程式只以 `main` 為準。
+
+## 17. 完整移交清單
+
+- [ ] 老闆已收藏官網網址。
+- [ ] 老闆已收藏 Studio 網址。
+- [ ] 老闆已加入 Sanity Project。
+- [ ] 老闆能登入 Studio。
+- [ ] 老闆能修改電話並發布。
+- [ ] 老闆能新增產品。
+- [ ] 老闆能上傳多張照片。
+- [ ] 老闆知道第一張照片是封面。
+- [ ] 老闆知道發布後約 5～20 分鐘生效。
+- [ ] 老闆知道如何手動部署。
+- [ ] 老闆能查看最新部署狀態。
+- [ ] 老闆知道 PageCMS 已停用。
+- [ ] 老闆不會使用 `cms-preview` 或 `sanity-cms`。
+- [ ] GitHub Variables 正確。
+- [ ] GitHub Secret 只保留 `SANITY_TOKEN`。
+- [ ] Sanity CORS 正確。
+- [ ] GitHub Pages Source 是 GitHub Actions。
+- [ ] 原開發者未在文件留下 Token 或密碼。
+
+## 18. 其他文件
+
+- README：<https://github.com/te87037/mattress-factory-demo/blob/main/README.md>
+- CMS 設定入口：<https://github.com/te87037/mattress-factory-demo/blob/main/CMS_SETUP.md>
+- Sanity 設定：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/SANITY_SETUP.md>
+- Sanity 現況：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/SANITY_SETUP_RESULT.md>
+- Memory：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/handoff/MEMORY.md>
+- 部署狀態：<https://github.com/te87037/mattress-factory-demo/blob/main/docs/GITHUB_PAGES_STATUS.md>
