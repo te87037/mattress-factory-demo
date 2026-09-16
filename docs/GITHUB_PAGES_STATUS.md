@@ -1,12 +1,12 @@
 # GitHub Pages 部署狀態
 
-官網與 Sanity Studio 建置：success
+官網與 Sanity Studio 建置：failure
 
-GitHub Pages 發布：success
+GitHub Pages 發布：skipped
 
 本次部署電話：037-742-5180
 
-Workflow Run ID：35084112500
+Workflow Run ID：35112974424
 
 官網：https://te87037.github.io/mattress-factory-demo/
 
